@@ -111,9 +111,9 @@ export const BackgroundTimeline = () => {
   const [displayCard, setDisplayCard] = useState<boolean>(false);
 
   useEffect(() => {
-    const element = backgroundRef.current;
-    if (!element) return;
-    const { top, bottom } = element.getBoundingClientRect();
+    const background = backgroundRef.current;
+    if (!background) return;
+    const { top, bottom } = background.getBoundingClientRect();
     setInitRatio(
       Math.max(Math.min(top / (bottom - top - window.innerHeight), 0), -1)
     );
@@ -121,28 +121,25 @@ export const BackgroundTimeline = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const element = backgroundRef.current;
+      const background = backgroundRef.current;
       const line = lineRef.current;
       const triangle = triangleRef.current;
 
-      if (!element || !line || !triangle) return;
-      const { top, bottom } = element.getBoundingClientRect();
+      if (!background || !line || !triangle) return;
+
+      const { top, bottom } = background.getBoundingClientRect();
       let ratio = Math.max(
         Math.min(top / (bottom - top - window.innerHeight), 0),
         -1
       );
 
-      let eventIndex = -1;
-      for (let i = 0; i < events.length; i++) {
-        if (
-          -ratio * 100 >= events[i].positionRatio - 0.5 &&
-          -ratio * 100 <= events[i].positionRatio + 0.5
-        ) {
-          eventIndex = i;
-          ratio = -events[i].positionRatio / 100;
-          break;
-        }
-      }
+      let eventIndex = events.findIndex((event) => {
+        return (
+          -ratio * 100 >= event.positionRatio - 0.5 &&
+          -ratio * 100 <= event.positionRatio + 0.5
+        );
+      });
+      ratio = eventIndex === -1 ? ratio : -events[eventIndex].positionRatio / 100;
 
       if (eventIndex === -1) {
         setDisplayCard(false);
@@ -160,12 +157,16 @@ export const BackgroundTimeline = () => {
         setOnEvent(events[eventIndex]);
         setDisplayCard(true);
       }
+
       const birthDay = new Date("May 3, 2002").getTime();
       setDate(
         eventIndex === -1
           ? new Date(
               birthDay + -ratio * (new Date().getTime() - birthDay)
-            ).toLocaleDateString(undefined, { year: "numeric", month: "long" })
+            ).toLocaleDateString(undefined, {
+              year: "numeric",
+              month: "long",
+            })
           : eventIndex === 0
           ? "3rd May 2002"
           : eventIndex === events.length - 1
@@ -175,10 +176,11 @@ export const BackgroundTimeline = () => {
               month: "long",
             })
       );
+
       line.style.transform = `translateX(${ratio * 100}%)`;
-      if (top < (top - bottom) / 2) triangle.style.marginBottom = "77vh";
-      else triangle.style.marginBottom = "0";
+      triangle.style.marginBottom = top < (top - bottom) / 2 ? "77vh" : "0";
     };
+
     window.addEventListener("wheel", handleScroll);
     return () => {
       window.removeEventListener("wheel", handleScroll);
@@ -197,55 +199,87 @@ export const BackgroundTimeline = () => {
             ).toFixed(1) + "vh",
         }}
       >
-        <div
-          ref={triangleRef}
-          className="sticky top-[18vh] mt-[25vh] w-[100vw]"
-          style={{
-            marginBottom: "77vh",
-          }}
-        >
-          {date === "" ? (
-            <p className="text-xl whitespace-pre"> </p>
-          ) : (
-            <p className="text-xl">{date}</p>
-          )}
-          <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-          <div
-            className={`${
-              displayCard ? "" : "opacity-0"
-            } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-secondaryColor bg-secondaryColor text-secondaryBackgroundColor p-10 rounded-md w-[60vw]`}
-          >
-            <h1 className="text-6xl tracking-tight pb-4">{onEvent?.title}</h1>
-            <p className="font-lato text-xl">{onEvent?.description}</p>
-          </div>
-        </div>
-        <div
-          ref={lineRef}
-          className="sticky top-[25vh] mb-[75vh] transition-all mt-[2vh] ml-[50vw] left-0 border-t-4 border-primaryColor"
-          style={{
-            width:
-              (
-                (new Date().getTime() - new Date("May 3, 2002").getTime()) /
-                157680000
-              ).toFixed(0) + "px",
-            transform: `translateX(${initRatio * 100}%)`,
-          }}
-        >
-          {events.map((myEvent: TimelineEvent, index: number) => (
-            <div
-              key={index}
-              className={`${
-                onEvent === myEvent
-                  ? "w-6 h-6 -top-[14px]"
-                  : "w-4 h-4 -top-[10px]"
-              } -translate-x-1/2 transition-all absolute rounded-full bg-accentColor`}
-              style={{
-                left: `${myEvent.positionRatio.toPrecision(7).toString()}%`,
-              }}
-            />
-          ))}
-        </div>
+        <DateIndicator
+          triangleRef={triangleRef}
+          date={date}
+          displayCard={displayCard}
+          onEvent={onEvent}
+        />
+        <TimeLine lineRef={lineRef} initRatio={initRatio} onEvent={onEvent} />
       </div>
     </section>
+  );
+};
+
+interface DateIndicatorProps {
+  triangleRef: React.RefObject<HTMLDivElement>;
+  date: string;
+  displayCard: boolean;
+  onEvent: TimelineEvent | null;
+}
+
+const DateIndicator = (props: DateIndicatorProps) => {
+  const { triangleRef, date, displayCard, onEvent } = props;
+
+  return (
+    <div
+      ref={triangleRef}
+      className="sticky top-[18vh] mt-[25vh] w-[100vw]"
+      style={{
+        marginBottom: "77vh",
+      }}
+    >
+      {date === "" ? (
+        <p className="text-xl whitespace-pre"> </p>
+      ) : (
+        <p className="text-xl">{date}</p>
+      )}
+      <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
+      <div
+        className={`${
+          displayCard ? "" : "opacity-0"
+        } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-secondaryColor bg-secondaryColor text-secondaryBackgroundColor p-10 rounded-md w-[60vw]`}
+      >
+        <h1 className="text-6xl tracking-tight pb-4">{onEvent?.title}</h1>
+        <p className="font-lato text-xl">{onEvent?.description}</p>
+      </div>
+    </div>
+  );
+};
+
+interface TimelineProps {
+  lineRef: React.RefObject<HTMLDivElement>;
+  initRatio: number;
+  onEvent: TimelineEvent | null;
+}
+
+const TimeLine = (props: TimelineProps) => {
+  const { lineRef, initRatio, onEvent } = props;
+
+  return (
+    <div
+      ref={lineRef}
+      className="sticky top-[25vh] mb-[75vh] transition-all mt-[2vh] ml-[50vw] left-0 border-t-4 border-primaryColor"
+      style={{
+        width:
+          (
+            (new Date().getTime() - new Date("May 3, 2002").getTime()) /
+            157680000
+          ).toFixed(0) + "px",
+        transform: `translateX(${initRatio * 100}%)`,
+      }}
+    >
+      {events.map((myEvent: TimelineEvent, index: number) => (
+        <div
+          key={index}
+          className={`${
+            onEvent === myEvent ? "w-6 h-6 -top-[14px]" : "w-4 h-4 -top-[10px]"
+          } -translate-x-1/2 transition-all absolute rounded-full bg-accentColor`}
+          style={{
+            left: `${myEvent.positionRatio.toPrecision(7).toString()}%`,
+          }}
+        />
+      ))}
+    </div>
   );
 };
