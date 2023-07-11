@@ -221,7 +221,7 @@ export const BackgroundTimeline = () => {
         </div>
         <div
           ref={lineRef}
-          className="sticky top-[25vh] mb-[75vh] transition-all mt-[2vh] ml-[50vw] left-0 border-t-4"
+          className="sticky top-[25vh] mb-[75vh] transition-all mt-[2vh] ml-[50vw] left-0 border-t-4 border-primaryColor"
           style={{
             width:
               (
