@@ -12,7 +12,7 @@ export default function Home() {
     <main>
       <Background />
       <div
-        className="translate-all h-full font-playfair"
+        className="translate-all h-full w-full font-playfair"
         style={{ scrollBehavior: "smooth" }}
       >
         <NavBar />
