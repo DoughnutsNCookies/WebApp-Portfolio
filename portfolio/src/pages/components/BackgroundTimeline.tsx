@@ -124,6 +124,7 @@ export const BackgroundTimeline = () => {
       const element = backgroundRef.current;
       const line = lineRef.current;
       const triangle = triangleRef.current;
+
       if (!element || !line || !triangle) return;
       const { top, bottom } = element.getBoundingClientRect();
       let ratio = Math.max(
@@ -212,7 +213,7 @@ export const BackgroundTimeline = () => {
           <div
             className={`${
               displayCard ? "" : "opacity-0"
-            } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-secondaryColor bg-secondaryColor text-secondaryBackgroundColor p-10 rounded-md`}
+            } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-secondaryColor bg-secondaryColor text-secondaryBackgroundColor p-10 rounded-md w-[60vw]`}
           >
             <h1 className="text-6xl tracking-tight pb-4">{onEvent?.title}</h1>
             <p className="font-lato text-xl">{onEvent?.description}</p>
