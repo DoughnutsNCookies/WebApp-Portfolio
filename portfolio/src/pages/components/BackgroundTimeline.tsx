@@ -129,7 +129,7 @@ export const BackgroundTimeline = () => {
 
       const { top, bottom } = background.getBoundingClientRect();
       let ratio = Math.max(
-        Math.min(top / (bottom - top - window.innerHeight), 0),
+        Math.min(top / (bottom - top - window.innerHeight * 2), 0),
         -1
       );
 
@@ -139,7 +139,8 @@ export const BackgroundTimeline = () => {
           -ratio * 100 <= event.positionRatio + 0.5
         );
       });
-      ratio = eventIndex === -1 ? ratio : -events[eventIndex].positionRatio / 100;
+      ratio =
+        eventIndex === -1 ? ratio : -events[eventIndex].positionRatio / 100;
 
       if (eventIndex === -1) {
         setDisplayCard(false);
@@ -238,10 +239,24 @@ const DateIndicator = (props: DateIndicatorProps) => {
       <div
         className={`${
           displayCard ? "" : "opacity-0"
-        } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-secondaryColor bg-secondaryColor text-secondaryBackgroundColor p-10 rounded-md w-[60vw]`}
+        } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]`}
       >
-        <h1 className="text-6xl tracking-tight pb-4">{onEvent?.title}</h1>
-        <p className="font-lato text-xl">{onEvent?.description}</p>
+        <h1
+          className="text-6xl tracking-tight pb-6"
+          style={{
+            textShadow: "10px 10px 25px #5ACEBA7D",
+          }}
+        >
+          {onEvent?.title}
+        </h1>
+        <p
+          className="font-lato text-xl tracking-wide"
+          style={{
+            textShadow: "2px 2px 10px #5ACEBA7D",
+          }}
+        >
+          {onEvent?.description}
+        </p>
       </div>
     </div>
   );

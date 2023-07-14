@@ -35,7 +35,7 @@ const useMousePosition = () => {
 };
 
 export const Background = ({
-  quantity = 50,
+  quantity = 200,
   staticity = 50,
   ease = 50,
   refresh = false,

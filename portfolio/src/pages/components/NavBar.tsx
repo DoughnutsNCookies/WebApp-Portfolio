@@ -38,6 +38,9 @@ export const NavBar = () => {
                 .getElementById("home")
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
+            style={{
+              textShadow: "2px 2px 15px #5ACEBA7D",
+            }}
           >
             Home
           </button>
@@ -49,6 +52,9 @@ export const NavBar = () => {
                 .getElementById("background")
                 ?.scrollIntoView({ behavior: "smooth" });
               setTimeout(() => setVisible(false), 1000);
+            }}
+            style={{
+              textShadow: "2px 2px 15px #5ACEBA7D",
             }}
           >
             Background
@@ -63,6 +69,9 @@ export const NavBar = () => {
                 ?.scrollIntoView({ behavior: "smooth" });
               setTimeout(() => setVisible(false), 1000);
             }}
+            style={{
+              textShadow: "2px 2px 15px #5ACEBA7D",
+            }}
           >
             Projects
           </button>
@@ -74,6 +83,9 @@ export const NavBar = () => {
                 .getElementById("live-location")
                 ?.scrollIntoView({ behavior: "smooth" });
               setTimeout(() => setVisible(false), 1000);
+            }}
+            style={{
+              textShadow: "2px 2px 15px #5ACEBA7D",
             }}
           >
             Live Location
