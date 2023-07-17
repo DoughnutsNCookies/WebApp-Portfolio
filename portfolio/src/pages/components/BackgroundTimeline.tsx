@@ -163,9 +163,9 @@ export const BackgroundTimeline = () => {
 
     const target = -events[eventIndex].positionRatio / 100;
     if (eventIndex === events.length - 1) {
-      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) - (window.innerHeight / 3));
+      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) - (window.innerHeight / 2));
     } else if (eventIndex === 0) {
-      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) + (window.innerHeight / 3));
+      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0));
     } else {
     window.scrollTo(0, document.getElementById("timeline" + (eventIndex))?.offsetTop || 0);
     }
