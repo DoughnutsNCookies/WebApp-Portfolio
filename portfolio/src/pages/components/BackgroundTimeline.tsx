@@ -105,10 +105,12 @@ export const BackgroundTimeline = () => {
   const lineRef = useRef<HTMLDivElement>(null);
   const triangleRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const movingTriangleRef = useRef<boolean>(false);
   const [onEvent, setOnEvent] = useState<TimelineEvent | null>(null);
   const [initRatio, setInitRatio] = useState<number>(0);
   const [date, setDate] = useState<string>("");
   const [displayCard, setDisplayCard] = useState<boolean>(false);
+  const [eventIndex, setEventIndex] = useState<number>(0);
 
   useEffect(() => {
     const background = backgroundRef.current;
@@ -120,7 +122,9 @@ export const BackgroundTimeline = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (event: WheelEvent) => {
+      if (movingTriangleRef.current) return;
+
       const background = backgroundRef.current;
       const line = lineRef.current;
       const triangle = triangleRef.current;
@@ -128,58 +132,21 @@ export const BackgroundTimeline = () => {
       if (!background || !line || !triangle) return;
 
       const { top, bottom } = background.getBoundingClientRect();
-      let ratio = Math.max(
-        Math.min(top / (bottom - top - window.innerHeight * 2), 0),
-        -1
-      );
-
-      let eventIndex = events.findIndex((event) => {
-        return (
-          -ratio * 100 >= event.positionRatio - 0.5 &&
-          -ratio * 100 <= event.positionRatio + 0.5
-        );
-      });
-      ratio =
-        eventIndex === -1 ? ratio : -events[eventIndex].positionRatio / 100;
-
-      if (eventIndex === -1) {
-        setDisplayCard(false);
-        if (!timeoutRef.current) {
-          timeoutRef.current = setTimeout(() => {
-            setOnEvent(null);
-            timeoutRef.current = null;
-          }, 300);
-        }
-      } else {
-        if (timeoutRef.current) {
-          clearTimeout(timeoutRef.current);
-          timeoutRef.current = null;
-        }
-        setOnEvent(events[eventIndex]);
-        setDisplayCard(true);
+      if (top > 0) {
+        setEventIndex(0);
+        return;
+      } else if (bottom < 0) {
+        setEventIndex(events.length - 1);
+        return;
       }
 
-      const birthDay = new Date("May 3, 2002").getTime();
-      setDate(
-        eventIndex === -1
-          ? new Date(
-              birthDay + -ratio * (new Date().getTime() - birthDay)
-            ).toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "long",
-            })
-          : eventIndex === 0
-          ? "3rd May 2002"
-          : eventIndex === events.length - 1
-          ? "Present"
-          : events[eventIndex].date.toLocaleDateString(undefined, {
-              year: "numeric",
-              month: "long",
-            })
-      );
-
-      line.style.transform = `translateX(${ratio * 100}%)`;
-      triangle.style.marginBottom = top < (top - bottom) / 2 ? "77vh" : "0";
+      setEventIndex((prev) => {
+        if (event.deltaY < 0) {
+          return prev === 0 ? prev : prev - 1;
+        } else {
+          return prev === events.length - 1 ? prev : prev + 1;
+        }
+      });
     };
 
     window.addEventListener("wheel", handleScroll);
@@ -188,16 +155,98 @@ export const BackgroundTimeline = () => {
     };
   }, []);
 
+  useEffect(() => {
+    movingTriangleRef.current = true;
+    const background = backgroundRef.current;
+    const triangle = triangleRef.current;
+    const line = lineRef.current;
+
+    const target = -events[eventIndex].positionRatio / 100;
+    if (eventIndex === events.length - 1) {
+      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) - (window.innerHeight / 3));
+    } else if (eventIndex === 0) {
+      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) + (window.innerHeight / 3));
+    } else {
+    window.scrollTo(0, document.getElementById("timeline" + (eventIndex))?.offsetTop || 0);
+    }
+    if (!background || !line || !triangle) return;
+    const { top, bottom } = background.getBoundingClientRect();
+    let ratio = Math.max(
+      Math.min(top / (bottom - top - window.innerHeight * 2), 0),
+      -1
+    );
+    ratio = target;
+
+    let atEvent = false;
+    for (let event of events) {
+      if (
+        -ratio * 100 >= event.positionRatio - 0.5 &&
+        -ratio * 100 <= event.positionRatio + 0.5
+      ) {
+        atEvent = true;
+        break;
+      }
+    }
+
+    if (atEvent === false) {
+      setDisplayCard(false);
+      if (!timeoutRef.current) {
+        timeoutRef.current = setTimeout(() => {
+          setOnEvent(null);
+          timeoutRef.current = null;
+        }, 300);
+      }
+    } else {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      setOnEvent(events[eventIndex]);
+      setDisplayCard(true);
+    }
+
+    const birthDay = new Date("May 3, 2002").getTime();
+    setDate(
+      atEvent === false
+        ? new Date(
+            birthDay + -ratio * (new Date().getTime() - birthDay)
+          ).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+          })
+        : eventIndex === 0
+        ? "3rd May 2002"
+        : eventIndex === events.length - 1
+        ? "Present"
+        : events[eventIndex].date.toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+          })
+    );
+
+    line.style.transform = `translateX(${ratio * 100}%)`;
+    triangle.style.marginBottom = top < (top - bottom) / 2 ? "77vh" : "0";
+    setTimeout(() => {
+      movingTriangleRef.current = false;
+    }, 300);
+  }, [eventIndex]);
+
   return (
     <section id="background" ref={backgroundRef}>
+      {events.map((myEvent: TimelineEvent, index: number) => (
+        <div
+          key={index}
+          id={"timeline" + index}
+          className="absolute h-[100vh]"
+          style={{
+            top: (index + 1) * 100 + "vh",
+          }}
+        />
+      ))}
       <div
         className="text-center flex flex-col"
         style={{
-          height:
-            (
-              (new Date().getTime() - new Date("May 3, 2002").getTime()) /
-              157680000
-            ).toFixed(1) + "vh",
+          height: events.length + "00vh",
         }}
       >
         <DateIndicator
@@ -228,6 +277,7 @@ const DateIndicator = (props: DateIndicatorProps) => {
       className="sticky top-[18vh] mt-[25vh] w-[100vw]"
       style={{
         marginBottom: "77vh",
+        transition: "transform 1s ease-in-out",
       }}
     >
       {date === "" ? (
@@ -282,6 +332,7 @@ const TimeLine = (props: TimelineProps) => {
             157680000
           ).toFixed(0) + "px",
         transform: `translateX(${initRatio * 100}%)`,
+        transition: "transform 1s ease-in-out",
       }}
     >
       {events.map((myEvent: TimelineEvent, index: number) => (
@@ -291,7 +342,7 @@ const TimeLine = (props: TimelineProps) => {
             onEvent === myEvent ? "w-6 h-6 -top-[14px]" : "w-4 h-4 -top-[10px]"
           } -translate-x-1/2 transition-all absolute rounded-full bg-accentColor`}
           style={{
-            left: `${myEvent.positionRatio.toPrecision(7).toString()}%`,
+            left: `${myEvent.positionRatio.toPrecision(6).toString()}%`,
           }}
         />
       ))}
