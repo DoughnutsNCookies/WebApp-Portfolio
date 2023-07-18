@@ -19,37 +19,43 @@ const projects = [
   new Project("Project 6", "Description 6", "Image 6"),
   new Project("Project 7", "Description 7", "Image 7"),
   new Project("Project 8", "Description 8", "Image 8"),
-]
+];
 
 export const Projects = () => {
   return (
     <section id="projects">
       <hr />
-      <div className="flex flex-row justify-between"
+      <div
+        className="flex flex-row justify-between"
         style={{
-          height: projects.length * 100 + "vh"
-        }}>
-          <div className="w-1/2 flex flex-col">
-            {projects.map((project: Project, index: number) => (
-              <div key={index} className="h-screen">
-                {project.image}
-              </div>
-            ))
-            }
-          </div>
-          <div className="border-l-2 -translate-x-1/2 border-secondaryColor h-full"/>
-          <div className="w-1/2 flex flex-col">
-            {projects.map((project: Project, index: number) => (
-              <div key={index} className="h-screen">
-                <h1 className="text-6xl tracking-tight">
-                  {project.title}
-                </h1>
-                <p className="font-lato text-xl">
-                  {project.description}
-                </p>
-              </div>
-            ))}
-          </div>
+          height: projects.length * 100 + "vh",
+        }}
+      >
+        <div className="w-1/2 flex flex-col">
+          {projects.map((project: Project, index: number) => (
+            <div
+              key={index}
+              className="h-screen m-10 border-4 rounded-xl bg-secondaryColor text-center"
+            >
+              {project.image}
+            </div>
+          ))}
+        </div>
+        <div className="w-1/2 flex flex-col">
+          {projects.map((project: Project, index: number) => (
+            <div
+              key={index}
+              className="h-screen m-10 border-4 rounded-xl bg-secondaryColor text-center"
+            >
+              <h1 className="text-6xl tracking-tight text-secondaryBackgroundColor">
+                {project.title}
+              </h1>
+              <p className="font-lato text-xl text-secondaryBackgroundColor">
+                {project.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

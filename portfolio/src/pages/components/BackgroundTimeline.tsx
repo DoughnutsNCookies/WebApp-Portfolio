@@ -129,10 +129,11 @@ export const BackgroundTimeline = () => {
       if (!background || !line || !triangle) return;
 
       const { top, bottom } = background.getBoundingClientRect();
+
       if (top > 0) {
         setEventIndex(0);
         return;
-      } else if (bottom < 0) {
+      } else if (bottom < window.innerHeight) {
         setEventIndex(events.length - 1);
         return;
       }
@@ -166,7 +167,7 @@ export const BackgroundTimeline = () => {
       window.scrollTo(
         0,
         (document.getElementById("timeline" + eventIndex)?.offsetTop || 0) -
-          window.innerHeight / 2
+          window.innerHeight / 3
       );
     } else if (eventIndex !== 0) {
       window.scrollTo(
