@@ -161,16 +161,23 @@ export const BackgroundTimeline = () => {
     const triangle = triangleRef.current;
     const line = lineRef.current;
 
-    const target = -events[eventIndex].positionRatio / 100;
-    if (eventIndex === events.length - 1) {
-      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0) - (window.innerHeight / 2));
-    } else if (eventIndex === 0) {
-      window.scrollTo(0, (document.getElementById("timeline" + (eventIndex))?.offsetTop || 0));
-    } else {
-    window.scrollTo(0, document.getElementById("timeline" + (eventIndex))?.offsetTop || 0);
-    }
     if (!background || !line || !triangle) return;
     const { top, bottom } = background.getBoundingClientRect();
+
+    const target = -events[eventIndex].positionRatio / 100;
+    if (eventIndex === events.length - 1) {
+      window.scrollTo(
+        0,
+        (document.getElementById("timeline" + eventIndex)?.offsetTop || 0) -
+          window.innerHeight / 2
+      );
+    } else {
+      window.scrollTo(
+        0,
+        document.getElementById("timeline" + eventIndex)?.offsetTop || 0
+      );
+    }
+
     let ratio = Math.max(
       Math.min(top / (bottom - top - window.innerHeight * 2), 0),
       -1
