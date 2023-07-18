@@ -104,12 +104,9 @@ export const BackgroundTimeline = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const triangleRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const movingTriangleRef = useRef<boolean>(false);
-  const [onEvent, setOnEvent] = useState<TimelineEvent | null>(null);
   const [initRatio, setInitRatio] = useState<number>(0);
   const [date, setDate] = useState<string>("");
-  const [displayCard, setDisplayCard] = useState<boolean>(false);
   const [eventIndex, setEventIndex] = useState<number>(0);
 
   useEffect(() => {
@@ -171,7 +168,7 @@ export const BackgroundTimeline = () => {
         (document.getElementById("timeline" + eventIndex)?.offsetTop || 0) -
           window.innerHeight / 2
       );
-    } else {
+    } else if (eventIndex !== 0) {
       window.scrollTo(
         0,
         document.getElementById("timeline" + eventIndex)?.offsetTop || 0
@@ -195,33 +192,8 @@ export const BackgroundTimeline = () => {
       }
     }
 
-    if (atEvent === false) {
-      setDisplayCard(false);
-      if (!timeoutRef.current) {
-        timeoutRef.current = setTimeout(() => {
-          setOnEvent(null);
-          timeoutRef.current = null;
-        }, 300);
-      }
-    } else {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-      setOnEvent(events[eventIndex]);
-      setDisplayCard(true);
-    }
-
-    const birthDay = new Date("May 3, 2002").getTime();
     setDate(
-      atEvent === false
-        ? new Date(
-            birthDay + -ratio * (new Date().getTime() - birthDay)
-          ).toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-          })
-        : eventIndex === 0
+      eventIndex === 0
         ? "3rd May 2002"
         : eventIndex === events.length - 1
         ? "Present"
@@ -259,10 +231,12 @@ export const BackgroundTimeline = () => {
         <DateIndicator
           triangleRef={triangleRef}
           date={date}
-          displayCard={displayCard}
-          onEvent={onEvent}
+          onEvent={events[eventIndex]}
         />
-        <TimeLine lineRef={lineRef} initRatio={initRatio} onEvent={onEvent} />
+        <TimeLine
+          lineRef={lineRef}
+          onEvent={events[eventIndex]}
+        />
       </div>
     </section>
   );
@@ -271,12 +245,11 @@ export const BackgroundTimeline = () => {
 interface DateIndicatorProps {
   triangleRef: React.RefObject<HTMLDivElement>;
   date: string;
-  displayCard: boolean;
   onEvent: TimelineEvent | null;
 }
 
 const DateIndicator = (props: DateIndicatorProps) => {
-  const { triangleRef, date, displayCard, onEvent } = props;
+  const { triangleRef, date, onEvent } = props;
 
   return (
     <div
@@ -287,17 +260,9 @@ const DateIndicator = (props: DateIndicatorProps) => {
         transition: "transform 1s ease-in-out",
       }}
     >
-      {date === "" ? (
-        <p className="text-xl whitespace-pre"> </p>
-      ) : (
-        <p className="text-xl">{date}</p>
-      )}
+      <p className="text-xl">{date}</p>
       <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-      <div
-        className={`${
-          displayCard ? "" : "opacity-0"
-        } absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]`}
-      >
+      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
         <h1
           className="text-6xl tracking-tight pb-6"
           style={{
@@ -321,12 +286,11 @@ const DateIndicator = (props: DateIndicatorProps) => {
 
 interface TimelineProps {
   lineRef: React.RefObject<HTMLDivElement>;
-  initRatio: number;
   onEvent: TimelineEvent | null;
 }
 
 const TimeLine = (props: TimelineProps) => {
-  const { lineRef, initRatio, onEvent } = props;
+  const { lineRef, onEvent } = props;
 
   return (
     <div
@@ -338,7 +302,7 @@ const TimeLine = (props: TimelineProps) => {
             (new Date().getTime() - new Date("May 3, 2002").getTime()) /
             157680000
           ).toFixed(0) + "px",
-        transform: `translateX(${initRatio * 100}%)`,
+        transform: `translateX(0)`,
         transition: "transform 1s ease-in-out",
       }}
     >
