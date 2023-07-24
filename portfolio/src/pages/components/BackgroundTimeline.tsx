@@ -105,18 +105,8 @@ export const BackgroundTimeline = () => {
   const lineRef = useRef<HTMLDivElement>(null);
   const triangleRef = useRef<HTMLDivElement>(null);
   const movingTriangleRef = useRef<boolean>(false);
-  const [initRatio, setInitRatio] = useState<number>(0);
   const [date, setDate] = useState<string>("");
   const [eventIndex, setEventIndex] = useState<number>(0);
-
-  useEffect(() => {
-    const background = backgroundRef.current;
-    if (!background) return;
-    const { top, bottom } = background.getBoundingClientRect();
-    setInitRatio(
-      Math.max(Math.min(top / (bottom - top - window.innerHeight), 0), -1)
-    );
-  }, []);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
