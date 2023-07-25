@@ -26,77 +26,77 @@ const events = [
   new TimelineEvent(
     new Date("May 3, 2002"),
     "Hello World",
-    "I was born and raised in a super-loving family of five, with my early years being full of mischief and wild adventures like any other kid. But as I got older, I learned that stepping out of my comfort zone and owning up to my actions was important."
+    "I was born and raised in a super-loving family of five."
   ),
   new TimelineEvent(
     new Date("January 2007"),
     "My First Piano Lesson",
-    "When I was 5 years old, I jumped into the world of piano playing. Long story short: I had minor ADHD and my parents thought that playing the piano would help me focus. It did, and I fell in love with it."
+    "At 5 years old, I started playing the piano and I fell in love with it."
   ),
   new TimelineEvent(
     new Date("January 2009"),
     "Primary School",
-    "When I was around 7 years old, I started primary school at SJK(C) Chung Hua. I was quite the playful troublemaker back then (maybe even now hehe). Grades? Oh, they were solidly above average, and life was just peaceful with the only worry being homework. Looking back, those carefree days of childhood still make me smile."
+    "At 7 years old, I started primary school at SJK(C) Chung Hua. Life was just peaceful with the only worry being homework."
   ),
   new TimelineEvent(
     new Date("January 2015"),
     "Visi Tutor",
-    "At the age of 13 years old, I moved from primary school to Visi Tutor for my IGCSE studies. I made such strong bonds with my close pals, to some I would even consider them as family. I managed to finish my IGCSE in just three years, way quicker than the norm. If I had the chance, I'd totally relive those high school years, as they definitely hold a special place in my heart."
+    "At 13 years old, I moved from primary school to Visi Tutor for my IGCSE studies."
   ),
   new TimelineEvent(
     new Date("July 2015"),
     "Church Pianist",
-    "I volunteered as a pianist at my local church. Every week, we would gather to jam and practice, pushing ourselves to improve. It was an absolute thrill when we decided to take part in two talent nights and we even snagged first place in our very first show! As my skills grew, I was appointed as the bandleader and have even started teaching little kids how to play the piano."
+    "I volunteered as a pianist at my local church. Every week, we would gather to jam and practice, pushing ourselves to improve."
   ),
   new TimelineEvent(
     new Date("January 2018"),
     "College Life",
-    "I wanted to dive headfirst into the music industry. So at the age of 16 years old, I joined the Foundation In Arts programme at Sunway College. Being the youngest in my class turned out to be pretty fun, I got to hang out with older folks and learn from their wisdom. I graduated college with an above-average grade, earning myself a scholarship for my university studies."
+    "At 16 years old, I joined the Foundation In Arts programme at Sunway College, being the youngest in my class"
   ),
   new TimelineEvent(
     new Date("March 2019"),
     "University Life",
-    "At the age of 17 years old, I started university. I learned a lot of things from all sorts of subjects, but it was sound-designing that truly captured my interest, making me realize that being a sound designer for games was my true calling. I got to dive into some cool projects and was pretty proud of the results. I graduated from university with First class honours, thanks to my dedication and hard work."
+    "At 17 years old, I was interested in the music industry, so pursued an Audio Engineering degree at Sunway University."
   ),
   new TimelineEvent(
     new Date("May 2021"),
     "Grade 8 Piano",
-    "I was 19 years old when I completed my Grade 8 piano, reaching this milestone felt like a massive win. I gotta give a huge shoutout to my incredible piano teacher. She had my back since day one, supporting me through the whole journey. Her guidance was priceless, and I seriously can't thank her enough for making this adventure unforgettable. She's the real MVP."
+    "At 19 years old, I completed my Grade 8 piano. Huge shoutout to my incredible piano teacher. She had my back since day one, the real MVP."
   ),
   new TimelineEvent(
     new Date("August 2021"),
     "Coding Adventure",
-    "My coding journey began when a good friend introduced me to the world of programming, and man, did I find it fun! Recognizing that most sound designers in the gaming industry require coding skills, I became determined to dedicate more time to learning this valuable skill set. Python became my first programming language and taught myself the ropes using YouTube tutorials and reading documentation."
+    "Wrote my first code in Python, taught myself the ropes using YouTube tutorials and reading documentation."
   ),
   new TimelineEvent(
     new Date("December 2021"),
     "Internship",
-    "I landed a gig at Vine Music Studio as a sound designer intern in the media industry, working on those flashy ads you see online like on YouTube. I was a bit bummed that I couldn't find any internships in sound design for games, but hey, the internship turned out to be pretty sweet. After the internship, I stuck around as a part-timer for the extra cash, but I could feel my passion shifting toward coding, slowly but surely."
+    "Soun designer intern at Vine Music Studio working on sounds for ads. I could feel my passion shifting toward coding, slowly but surely."
   ),
   new TimelineEvent(
     new Date("May 2022"),
     "42KL Piscine",
-    "I discovered 42KL, a free coding school without teachers or classes. Intrigued, I decided to take part in their intense one-month BootCamp called the Piscine. It was a wild experience. In just a month, I have learned so much about programming. The BootCamp was intense, with weekly exams and an 8-hour final exam marathon. I met people from diverse backgrounds, and we learned from each other. It was an exhilarating journey packed with thrilling learning experiences. Without a doubt, that month was the best time of my life."
+    "I took part in 42KL's intense one-month BootCamp called the Piscine. It was intense but I definitely learned a lot of things. Without a doubt, that month was the best time of my life."
   ),
   new TimelineEvent(
     new Date("July 2022"),
     "42KL Cadet",
-    "After waiting for a whole month to hear back about our results, the day arrived — the most important email came into my inbox, and there it wrote that I'd made it into the core programme! Marking the beginning of my journey being a cadet of 42KL. I met more awesome new friends, each with their own unique background and story, with more things to learn from each other."
+    "I'd made it into the core programme! Marking the beginning of my journey being a cadet of 42KL. I met more awesome new friends, with more things to learn from each other."
   ),
   new TimelineEvent(
     new Date("August 2022"),
     "No Regrets",
-    "My passion for sound design for the media was at its lowest, so I ended my gig at Vine Music Studio and I knew it was time to shift gears and fully concentrate on 42KL and coding. It was a big risk since sacrificing this job would mean sacrificing the income that comes with it and I was already struggling financially. But you know what? I'm determined to make it work because this coding journey is something I'm willing to hustle for."
+    "My passion for sound design was at its lowest, so I ended my gig at Vine Music Studio. I knew it was time to shift gears and fully concentrate on 42KL and coding."
   ),
   new TimelineEvent(
     new Date("June 2023"),
     "Completed Cadetship",
-    "Boom! At the age of 21 years old, I finally wrapped up the final project of the core programme and crushed the final exam, becoming the first cadet in 42KL to complete the Core Programme in less than a year. My final project was so good that we even got to showcase it to lecturers, students, the esteemed board of directors, and even representatives of the Malaysian Qualifications Agency (MQA). Now, I'm diving into specialization within 42KL, ready to level up my coding skills even more."
+    "At 21 years old, I become the first cadet in 42KL to complete the Core Programme in less than a year. Now, I'm diving into specialization within 42KL, ready to level up my coding skills even more."
   ),
   new TimelineEvent(
     new Date(),
     "Present",
-    "Here we are now, with you are looking at my portfolio. Thank you for taking the time to read through my timeline and I hope you enjoyed it!"
+    "Here we are now, with you looking at my portfolio. Thank you for taking the time to read through my timeline and I hope you enjoyed it!"
   ),
 ];
 
@@ -263,7 +263,7 @@ const DateIndicator = (props: DateIndicatorProps) => {
           {onEvent?.title}
         </h1>
         <p
-          className="font-lato text-xl tracking-wide"
+          className="font-lato text-2xl tracking-wider"
           style={{
             textShadow: "2px 2px 10px #5ACEBA7D",
           }}
