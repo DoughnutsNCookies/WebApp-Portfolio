@@ -19,6 +19,7 @@ export default function Home() {
         <HomePage />
         <BackgroundTimeline />
         <Projects />
+        <div className="h-screen"></div>
         <LiveLocation />
         <LetsTalk />
       </div>
