@@ -26,7 +26,7 @@ const events = [
   new TimelineEvent(
     new Date("May 3, 2002"),
     "Hello World",
-    "I was born and raised in a super-loving family of five."
+    "Born and raised in a super-loving family of five."
   ),
   new TimelineEvent(
     new Date("January 2007"),
