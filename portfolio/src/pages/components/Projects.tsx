@@ -37,12 +37,12 @@ const projectsLeft = [
 const projectsRight = [
   new Project(
     "Philosophers",
-    "The Philosopher project provided a valuable learning experience in multithreading and multiprocessors in C, where I explored concurrent programming concepts. By recreating the famous dining philosophers' problem using C, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
+    "The Philosopher project provided a learning experience in multithreading and multiprocessors in C, where I explored concurrent programming concepts. By recreating the dining philosophers' problem, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Philosophers"
   ),
   new Project(
     "Minishell",
-    "Minishell is a project that involves building a lightweight shell in C, akin to bash. The project's comprehensive feature set includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses, which enables users to interact with the shell efficiently and flexibly.",
+    "Minishell is a project that involves building a shell in C, akin to bash. The project's includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses, which enables users to interact with the shell efficiently and flexibly.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Minishell"
   ),
   new Project(
@@ -134,19 +134,21 @@ const ProjectCards = (props: ProjectCardProps) => {
     >
       {projects.map((project: Project, index: number) => (
         <div className="h-screen flex items-center" key={index}>
-          <div className="h-[80vh] w-full m-10 border-4 rounded-xl bg-secondaryColor text-center px-10">
-            <h1 className="text-6xl py-4 tracking-tight text-secondaryBackgroundColor">
-              {project.title}
-            </h1>
-            <Image
-              projectName={project.title}
-              image={`assets/${project.title}-image.png`}
-              gif={`assets/${project.title}-gif.gif`}
-            />
-            <p className="font-lato text-xl text-secondaryBackgroundColor py-4">
-              {project.description}
-            </p>
-            <a href={project.link} target="_blank" className="font-lato text-2xl text-secondaryBackgroundColor py-4 underline font-extrabold">
+          <div className="flex flex-col justify-between h-[80vh] w-full m-10 border-4 rounded-xl bg-secondaryColor text-center px-10">
+            <div>
+              <h1 className="text-6xl py-4 tracking-tight text-secondaryBackgroundColor">
+                {project.title}
+              </h1>
+              <Image
+                projectName={project.title}
+                image={`assets/${project.title}-image.png`}
+                gif={`assets/${project.title}-gif.gif`}
+              />
+              <p className="font-lato text-xl text-secondaryBackgroundColor pt-4">
+                {project.description}
+              </p>
+            </div>
+            <a href={project.link} target="_blank" className=" pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold">
               Project GitHub
             </a>
           </div>
