@@ -146,6 +146,9 @@ const ProjectCards = (props: ProjectCardProps) => {
             <p className="font-lato text-xl text-secondaryBackgroundColor py-4">
               {project.description}
             </p>
+            <a href={project.link} target="_blank" className="font-lato text-2xl text-secondaryBackgroundColor py-4 underline font-extrabold">
+              Project GitHub
+            </a>
           </div>
         </div>
       ))}
