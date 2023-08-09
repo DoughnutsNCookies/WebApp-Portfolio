@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import EventContext from "../contexts/EventContext";
 
 class TimelineEvent {
   constructor(date: Date, title: string, description: string) {
@@ -26,12 +27,12 @@ const events = [
   new TimelineEvent(
     new Date("May 3, 2002"),
     "Hello World",
-    "Born and raised in a super-loving family of five."
+    "Hello! I was born on this date, raised in a super-loving family of five."
   ),
   new TimelineEvent(
     new Date("January 2007"),
     "My First Piano Lesson",
-    "At 5 years old, I started playing the piano and I fell in love with it."
+    "At 5 years old, I started playing the piano and I fell in love with it instantly."
   ),
   new TimelineEvent(
     new Date("January 2009"),
@@ -71,7 +72,7 @@ const events = [
   new TimelineEvent(
     new Date("December 2021"),
     "Internship",
-    "Soun designer intern at Vine Music Studio working on sounds for ads. I could feel my passion shifting toward coding, slowly but surely."
+    "Sound designer intern at Vine Music Studio working on sounds for ads. I could feel my passion shifting toward coding, slowly but surely."
   ),
   new TimelineEvent(
     new Date("May 2022"),
@@ -106,7 +107,8 @@ export const BackgroundTimeline = () => {
   const triangleRef = useRef<HTMLDivElement>(null);
   const movingTriangleRef = useRef<boolean>(false);
   const [date, setDate] = useState<string>("");
-  const [eventIndex, setEventIndex] = useState<number>(0);
+  const { setDisplayEvent, eventIndex, setEventIndex } =
+    useContext(EventContext);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
@@ -120,6 +122,7 @@ export const BackgroundTimeline = () => {
 
       const { top, bottom } = background.getBoundingClientRect();
 
+      setDisplayEvent(true);
       if (top > 0) {
         setEventIndex(0);
         return;
@@ -128,12 +131,14 @@ export const BackgroundTimeline = () => {
         return;
       }
 
-      setEventIndex((prev) => {
-        if (event.deltaY < 0) {
-          return prev === 0 ? prev : prev - 1;
-        } else {
-          return prev === events.length - 1 ? prev : prev + 1;
-        }
+      setEventIndex((prev: number) => {
+        return event.deltaY < 0
+          ? prev === 0
+            ? prev
+            : prev - 1
+          : prev === events.length - 1
+          ? prev
+          : prev + 1;
       });
     };
 
@@ -152,18 +157,20 @@ export const BackgroundTimeline = () => {
     if (!background || !line || !triangle) return;
     const { top, bottom } = background.getBoundingClientRect();
 
-    const target = -events[eventIndex].positionRatio / 100;
-    if (eventIndex === events.length - 1) {
+    var index = eventIndex;
+    triangle.style.marginBottom = top < (top - bottom) / 2 ? "77vh" : "0";
+    if (index == 0) {
+      triangle.style.marginBottom = "0";
+    }
+
+    const target = -events[index].positionRatio / 100;
+    if (index === events.length - 2) {
       window.scrollTo(
         0,
-        (document.getElementById("timeline" + eventIndex)?.offsetTop || 0) -
-          window.innerHeight / 3
+        document.getElementById("timeline" + index)?.offsetTop || 0
       );
-    } else if (eventIndex !== 0) {
-      window.scrollTo(
-        0,
-        document.getElementById("timeline" + eventIndex)?.offsetTop || 0
-      );
+    } else if (index === 1) {
+      window.scrollTo(0, document.getElementById("timeline1")?.offsetTop || 0);
     }
 
     let ratio = Math.max(
@@ -184,18 +191,17 @@ export const BackgroundTimeline = () => {
     }
 
     setDate(
-      eventIndex === 0
+      index === 0
         ? "3rd May 2002"
-        : eventIndex === events.length - 1
+        : index === events.length - 1
         ? "Present"
-        : events[eventIndex].date.toLocaleDateString(undefined, {
+        : events[index].date.toLocaleDateString(undefined, {
             year: "numeric",
             month: "long",
           })
     );
 
     line.style.transform = `translateX(${ratio * 100}%)`;
-    triangle.style.marginBottom = top < (top - bottom) / 2 ? "77vh" : "0";
     setTimeout(() => {
       movingTriangleRef.current = false;
     }, 300);
@@ -224,10 +230,11 @@ export const BackgroundTimeline = () => {
           date={date}
           onEvent={events[eventIndex]}
         />
-        <TimeLine
-          lineRef={lineRef}
-          onEvent={events[eventIndex]}
-        />
+        <TimeLine lineRef={lineRef} onEvent={events[eventIndex]} />
+        <div className="sticky top-[80vh] flex flex-row justify-between">
+          <SkipButton setEventIndex={setEventIndex} beginning={true} />
+          <SkipButton setEventIndex={setEventIndex} beginning={false} />
+        </div>
       </div>
     </section>
   );
@@ -241,6 +248,7 @@ interface DateIndicatorProps {
 
 const DateIndicator = (props: DateIndicatorProps) => {
   const { triangleRef, date, onEvent } = props;
+  const { displayEvent } = useContext(EventContext);
 
   return (
     <div
@@ -253,24 +261,26 @@ const DateIndicator = (props: DateIndicatorProps) => {
     >
       <p className="text-xl">{date}</p>
       <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
-        <h1
-          className="text-6xl tracking-tight pb-6"
-          style={{
-            textShadow: "10px 10px 25px #5ACEBA7D",
-          }}
-        >
-          {onEvent?.title}
-        </h1>
-        <p
-          className="font-lato text-2xl tracking-wider"
-          style={{
-            textShadow: "2px 2px 10px #5ACEBA7D",
-          }}
-        >
-          {onEvent?.description}
-        </p>
-      </div>
+      {displayEvent && (
+        <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
+          <h1
+            className="text-6xl tracking-tight pb-6"
+            style={{
+              textShadow: "10px 10px 25px #5ACEBA7D",
+            }}
+          >
+            {onEvent?.title}
+          </h1>
+          <p
+            className="font-lato text-2xl tracking-wider"
+            style={{
+              textShadow: "2px 2px 10px #5ACEBA7D",
+            }}
+          >
+            {onEvent?.description}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
@@ -309,5 +319,55 @@ const TimeLine = (props: TimelineProps) => {
         />
       ))}
     </div>
+  );
+};
+
+interface SkipButtonProps {
+  setEventIndex: React.Dispatch<React.SetStateAction<number>>;
+  beginning: boolean;
+}
+
+const SkipButton = (props: SkipButtonProps) => {
+  const { setEventIndex, beginning } = props;
+
+  return (
+    <button
+      className="w-52 flex flex-col mx-20 items-center py-1 font-lato text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl"
+      onClick={() => {
+        setEventIndex(beginning ? 0 : events.length - 1);
+        window.scrollTo(
+          0,
+          beginning
+            ? window.innerHeight * 2
+            : (document.getElementById("timeline" + (events.length - 1))
+                ?.offsetTop || 0) -
+                window.innerHeight / 3
+        );
+      }}
+    >
+      {beginning ? (
+        <div className="flex flex-row items-center gap-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 448 512"
+          >
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+          </svg>
+          <p className="font-lato font-extrabold">Beginning</p>
+        </div>
+      ) : (
+        <div className="flex flex-row items-center gap-4">
+          <p className="font-lato font-extrabold">Present</p>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 448 512"
+          >
+            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+          </svg>
+        </div>
+      )}
+    </button>
   );
 };

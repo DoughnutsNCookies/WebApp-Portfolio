@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import EventContext from "../contexts/EventContext";
 
 export const NavBar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [firstLoad, setFirstLoad] = useState(true);
-  const [visible, setVisible] = useState(true);
+  const [NavVisible, setNavVisible] = useState(true);
+  const { setDisplayEvent, setEventIndex } = useContext(EventContext);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      setVisible(prevScrollPos > currentScrollPos);
+      setNavVisible(prevScrollPos > currentScrollPos);
       setPrevScrollPos(currentScrollPos);
     };
 
@@ -18,7 +20,7 @@ export const NavBar = () => {
   }, [prevScrollPos]);
 
   const navbarStyle = {
-    transform: visible ? "translateY(0)" : "translateY(-100%)",
+    transform: NavVisible ? "translateY(0)" : "translateY(-100%)",
     transition: "transform 300ms",
   };
 
@@ -33,7 +35,8 @@ export const NavBar = () => {
         <li>
           <button
             onClick={(e) => {
-              setVisible(true);
+              setNavVisible(true);
+              setEventIndex(0);
               document
                 .getElementById("home")
                 ?.scrollIntoView({ behavior: "smooth" });
@@ -48,10 +51,15 @@ export const NavBar = () => {
         <li>
           <button
             onClick={(e) => {
-              document
-                .getElementById("background")
-                ?.scrollIntoView({ behavior: "smooth" });
-              setTimeout(() => setVisible(false), 1000);
+              setEventIndex(0);
+              setDisplayEvent(true);
+              setTimeout(() => {
+                setNavVisible(false);
+              }, 1000);
+              window.scrollTo(
+                0,
+                document.getElementById("timeline0")?.offsetTop || 0
+              );
             }}
             style={{
               textShadow: "2px 2px 15px #5ACEBA7D",
@@ -63,11 +71,13 @@ export const NavBar = () => {
         <li>
           <button
             onClick={(e) => {
-              setVisible(true);
+              setDisplayEvent(false);
+              setTimeout(() => {
+                setNavVisible(false);
+              }, 1000);
               document
                 .getElementById("projects")
                 ?.scrollIntoView({ behavior: "smooth" });
-              setTimeout(() => setVisible(false), 1000);
             }}
             style={{
               textShadow: "2px 2px 15px #5ACEBA7D",
@@ -79,10 +89,13 @@ export const NavBar = () => {
         <li>
           <button
             onClick={(e) => {
+              setDisplayEvent(false);
+              setTimeout(() => {
+                setNavVisible(false);
+              }, 1000);
               document
                 .getElementById("live-location")
                 ?.scrollIntoView({ behavior: "smooth" });
-              setTimeout(() => setVisible(false), 1000);
             }}
             style={{
               textShadow: "2px 2px 15px #5ACEBA7D",
@@ -94,10 +107,13 @@ export const NavBar = () => {
         <li className="bg-primaryColor py-2 px-4 rounded-md">
           <button
             onClick={(e) => {
+              setDisplayEvent(false);
+              setTimeout(() => {
+                setNavVisible(false);
+              }, 1000);
               document
                 .getElementById("lets-talk")
                 ?.scrollIntoView({ behavior: "smooth" });
-              setTimeout(() => setVisible(false), 1000);
             }}
           >
             Let's Talk
