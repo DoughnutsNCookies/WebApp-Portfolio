@@ -1,11 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import ProjectContext from "../contexts/ProjectContext";
 
 class Project {
-  constructor(
-    title: string,
-    description: string,
-    link: string
-  ) {
+  constructor(title: string, description: string, link: string) {
     this.title = title;
     this.description = description;
     this.link = link;
@@ -56,6 +53,7 @@ export const Projects = () => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const { resetProject, showProject, setShowProject } = useContext(ProjectContext);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
@@ -65,13 +63,16 @@ export const Projects = () => {
       if (!project || !left || !right) return;
 
       const { top, bottom } = project.getBoundingClientRect();
-
+      
+      setShowProject(true);
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
+        setShowProject(false);
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
         right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;
+        if (bottom < window.innerHeight * 2) setShowProject(false);
       }
 
       setTimeout(() => {
@@ -99,10 +100,20 @@ export const Projects = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const project = projectRef.current;
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!project || !left || !right) return;
+    
+    left.style.top = `0px`;
+    right.style.bottom = `0px`;
+  }, [resetProject])
+
   return (
-    <section id="projects" ref={projectRef}>
+    <section id="projects" ref={projectRef} className={`${showProject ? "opacity-100" : "opacity-0"} transition-all`}>
       <div
-        className="flex flex-row justify-between"
+        className="flex flex-row justify-between transition-all"
         style={{
           height: (projectsLeft.length + 1) * 100 + "vh",
         }}
@@ -148,7 +159,11 @@ const ProjectCards = (props: ProjectCardProps) => {
                 {project.description}
               </p>
             </div>
-            <a href={project.link} target="_blank" className=" pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold">
+            <a
+              href={project.link}
+              target="_blank"
+              className=" pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold"
+            >
               Project GitHub
             </a>
           </div>

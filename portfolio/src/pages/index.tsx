@@ -7,10 +7,13 @@ import { LiveLocation } from "./components/LiveLocation";
 import { LetsTalk } from "./components/LetsTalk";
 import { Background } from "./components/Background";
 import EventContext from "./contexts/EventContext";
+import ProjectContext from "./contexts/ProjectContext";
 
 export default function Home() {
   const [eventIndex, setEventIndex] = useState<number>(0);
   const [displayEvent, setDisplayEvent] = useState<boolean>(false);
+  const [showProject, setShowProject] = useState<boolean>(true);
+  const [resetProject, setResetProject] = useState<boolean>(true);
 
   return (
     <main>
@@ -22,13 +25,15 @@ export default function Home() {
         <EventContext.Provider
           value={{ displayEvent, setDisplayEvent, eventIndex, setEventIndex }}
         >
-          <NavBar />
-          <HomePage />
-          <BackgroundTimeline />
-          <Projects />
-          {/* <div className="h-screen"></div> */}
-          <LiveLocation />
-          <LetsTalk />
+          <ProjectContext.Provider value={{ resetProject, setResetProject, showProject, setShowProject }}>
+            <NavBar />
+            <HomePage />
+            <BackgroundTimeline />
+            <Projects />
+            <div className="h-[50vh]"></div>
+            <LiveLocation />
+            <LetsTalk />
+          </ProjectContext.Provider>
         </EventContext.Provider>
       </div>
     </main>

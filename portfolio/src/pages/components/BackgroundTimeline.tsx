@@ -107,7 +107,7 @@ export const BackgroundTimeline = () => {
   const triangleRef = useRef<HTMLDivElement>(null);
   const movingTriangleRef = useRef<boolean>(false);
   const [date, setDate] = useState<string>("");
-  const { setDisplayEvent, eventIndex, setEventIndex } =
+  const { displayEvent, setDisplayEvent, eventIndex, setEventIndex } =
     useContext(EventContext);
 
   useEffect(() => {
@@ -179,17 +179,6 @@ export const BackgroundTimeline = () => {
     );
     ratio = target;
 
-    let atEvent = false;
-    for (let event of events) {
-      if (
-        -ratio * 100 >= event.positionRatio - 0.5 &&
-        -ratio * 100 <= event.positionRatio + 0.5
-      ) {
-        atEvent = true;
-        break;
-      }
-    }
-
     setDate(
       index === 0
         ? "3rd May 2002"
@@ -208,7 +197,7 @@ export const BackgroundTimeline = () => {
   }, [eventIndex]);
 
   return (
-    <section id="background" ref={backgroundRef}>
+    <section id="background" ref={backgroundRef} className={`${displayEvent ? "opacity-100" : "opacity-0"} transition-all`}>
       {events.map((myEvent: TimelineEvent, index: number) => (
         <div
           key={index}
@@ -231,7 +220,7 @@ export const BackgroundTimeline = () => {
           onEvent={events[eventIndex]}
         />
         <TimeLine lineRef={lineRef} onEvent={events[eventIndex]} />
-        <div className="sticky top-[80vh] flex flex-row justify-between">
+        <div className="sticky top-[80vh] mb-[20vh] flex flex-row justify-between">
           <SkipButton setEventIndex={setEventIndex} beginning={true} />
           <SkipButton setEventIndex={setEventIndex} beginning={false} />
         </div>
@@ -248,7 +237,6 @@ interface DateIndicatorProps {
 
 const DateIndicator = (props: DateIndicatorProps) => {
   const { triangleRef, date, onEvent } = props;
-  const { displayEvent } = useContext(EventContext);
 
   return (
     <div
@@ -261,26 +249,25 @@ const DateIndicator = (props: DateIndicatorProps) => {
     >
       <p className="text-xl">{date}</p>
       <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-      {displayEvent && (
-        <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
-          <h1
-            className="text-6xl tracking-tight pb-6"
-            style={{
-              textShadow: "10px 10px 25px #5ACEBA7D",
-            }}
-          >
-            {onEvent?.title}
-          </h1>
-          <p
-            className="font-lato text-2xl tracking-wider"
-            style={{
-              textShadow: "2px 2px 10px #5ACEBA7D",
-            }}
-          >
-            {onEvent?.description}
-          </p>
-        </div>
-      )}
+
+      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
+        <h1
+          className="text-6xl tracking-tight pb-6"
+          style={{
+            textShadow: "10px 10px 25px #5ACEBA7D",
+          }}
+        >
+          {onEvent?.title}
+        </h1>
+        <p
+          className="font-lato text-2xl tracking-wider"
+          style={{
+            textShadow: "2px 2px 10px #5ACEBA7D",
+          }}
+        >
+          {onEvent?.description}
+        </p>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import EventContext from "../contexts/EventContext";
+import ProjectContext from "../contexts/ProjectContext";
 
 export const NavBar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [firstLoad, setFirstLoad] = useState(true);
   const [NavVisible, setNavVisible] = useState(true);
   const { setDisplayEvent, setEventIndex } = useContext(EventContext);
+  const { resetProject, setResetProject, showProject, setShowProject} = useContext(ProjectContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +39,8 @@ export const NavBar = () => {
             onClick={(e) => {
               setNavVisible(true);
               setEventIndex(0);
+              setDisplayEvent(false);
+              setShowProject(false);
               document
                 .getElementById("home")
                 ?.scrollIntoView({ behavior: "smooth" });
@@ -53,12 +57,13 @@ export const NavBar = () => {
             onClick={(e) => {
               setEventIndex(0);
               setDisplayEvent(true);
+              setShowProject(false);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
               window.scrollTo(
                 0,
-                document.getElementById("timeline0")?.offsetTop || 0
+                window.innerHeight * 2
               );
             }}
             style={{
@@ -72,6 +77,8 @@ export const NavBar = () => {
           <button
             onClick={(e) => {
               setDisplayEvent(false);
+              setShowProject(true);
+              setResetProject(!resetProject);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
@@ -90,6 +97,7 @@ export const NavBar = () => {
           <button
             onClick={(e) => {
               setDisplayEvent(false);
+              setShowProject(false);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
@@ -108,6 +116,7 @@ export const NavBar = () => {
           <button
             onClick={(e) => {
               setDisplayEvent(false);
+              setShowProject(false);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
