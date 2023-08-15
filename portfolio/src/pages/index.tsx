@@ -12,7 +12,7 @@ import ProjectContext from "./contexts/ProjectContext";
 export default function Home() {
   const [eventIndex, setEventIndex] = useState<number>(0);
   const [displayEvent, setDisplayEvent] = useState<boolean>(false);
-  const [showProject, setShowProject] = useState<boolean>(true);
+  const [showProject, setShowProject] = useState<boolean>(false);
   const [resetProject, setResetProject] = useState<boolean>(true);
 
   return (
