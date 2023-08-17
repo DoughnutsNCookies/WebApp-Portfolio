@@ -38,7 +38,9 @@ export default function Home() {
             <BackgroundTimeline />
             <Projects />
             <div className="h-[50vh]"></div>
+            <hr />
             <LiveLocation />
+            <hr />
             <LetsTalk />
           </ProjectContext.Provider>
         </EventContext.Provider>

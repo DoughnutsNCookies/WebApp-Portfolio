@@ -1,20 +1,19 @@
+import LocationContext from "@/pages/contexts/LocationContext";
 import "leaflet/dist/leaflet.css";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const Map = () => {
   const randomLocationSet = useRef(false);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
-  const [city, setCity] = useState<string>("");
-  const [prov, setProv] = useState<string>("");
+  const { city, setCity, prov, setProv } = useContext(LocationContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("/api/getRandomLocation");
         const jsonData = await response.json();
-        console.log(jsonData.nearest);
         setLatitude(jsonData.nearest.latt);
         setLongitude(jsonData.nearest.longt);
         setCity(jsonData.nearest.city);
@@ -34,7 +33,7 @@ const Map = () => {
     <MapContainer
       center={[latitude, longitude]}
       zoom={8}
-      style={{ height: "400px", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

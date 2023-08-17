@@ -162,7 +162,7 @@ const ProjectCards = (props: ProjectCardProps) => {
             <a
               href={project.link}
               target="_blank"
-              className=" pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold"
+              className="pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold"
             >
               Project GitHub
             </a>
