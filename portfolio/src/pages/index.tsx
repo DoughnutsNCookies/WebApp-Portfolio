@@ -14,7 +14,7 @@ export default function Home() {
   const [displayEvent, setDisplayEvent] = useState<boolean>(false);
   const [showProject, setShowProject] = useState<boolean>(false);
   const [resetProject, setResetProject] = useState<boolean>(true);
-
+  
   return (
     <main>
       <Background />
@@ -25,7 +25,14 @@ export default function Home() {
         <EventContext.Provider
           value={{ displayEvent, setDisplayEvent, eventIndex, setEventIndex }}
         >
-          <ProjectContext.Provider value={{ resetProject, setResetProject, showProject, setShowProject }}>
+          <ProjectContext.Provider
+            value={{
+              resetProject,
+              setResetProject,
+              showProject,
+              setShowProject,
+            }}
+          >
             <NavBar />
             <HomePage />
             <BackgroundTimeline />

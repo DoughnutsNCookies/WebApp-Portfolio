@@ -197,7 +197,11 @@ export const BackgroundTimeline = () => {
   }, [eventIndex]);
 
   return (
-    <section id="background" ref={backgroundRef} className={`${displayEvent ? "opacity-100" : "opacity-0"} transition-all`}>
+    <section
+      id="background"
+      ref={backgroundRef}
+      className={`${displayEvent ? "opacity-100" : "opacity-0"} transition-all`}
+    >
       {events.map((myEvent: TimelineEvent, index: number) => (
         <div
           key={index}
@@ -249,7 +253,6 @@ const DateIndicator = (props: DateIndicatorProps) => {
     >
       <p className="text-xl">{date}</p>
       <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-
       <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
         <h1
           className="text-6xl tracking-tight pb-6"
@@ -301,7 +304,7 @@ const TimeLine = (props: TimelineProps) => {
             onEvent === myEvent ? "w-6 h-6 -top-[14px]" : "w-4 h-4 -top-[10px]"
           } -translate-x-1/2 transition-all absolute rounded-full bg-accentColor`}
           style={{
-            left: `${myEvent.positionRatio.toPrecision(6).toString()}%`,
+            left: `${myEvent.positionRatio.toPrecision(5).toString()}%`,
           }}
         />
       ))}
