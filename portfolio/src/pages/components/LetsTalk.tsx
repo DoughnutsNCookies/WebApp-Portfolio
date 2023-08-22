@@ -1,12 +1,54 @@
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import ContactContext from "../contexts/ContactContext";
 
 export const LetsTalk = () => {
+  const letsTalkRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  const socialRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const { showContact, setShowContact } = useContext(ContactContext);
+
+  useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      const letsTalk = letsTalkRef.current;
+      const contact = contactRef.current;
+      const social = socialRef.current;
+      const line = lineRef.current;
+      if (!letsTalk || !contact || !social || !line) return;
+
+      const { top } = letsTalk.getBoundingClientRect();
+      if (top > window.innerHeight)
+        return;
+      const transform = ((window.innerHeight - top) / window.innerHeight * 100) - 100;
+      contact.style.transform = `translateX(${transform}vw)`;
+      social.style.transform = `translateX(${-transform}vw)`;
+      line.style.opacity = `${top == 0 ? 100 : 50 + transform}%`;
+    };
+
+    window.addEventListener("wheel", handleScroll);
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    setShowContact(false);
+    const contact = contactRef.current;
+    const social = socialRef.current;
+    const line = lineRef.current;
+    if (!contact || !social || !line) return;
+
+    contact.style.transform = `translateX(0vw)`;
+    social.style.transform = `translateX(0vw)`;
+    line.style.opacity = `100%`;
+  }, [showContact])
+
   return (
-    <section id="lets-talk">
+    <section id="lets-talk" ref={letsTalkRef}>
       <div className="flex flex-col items-center h-screen">
-        <h1 className="text-5xl tracking-tighter pt-20">Let's Talk!</h1>
+        <h1 className="text-5xl tracking-tighter pt-20" >Let's Talk!</h1>
         <div className="flex flex-row items-center justify-center pt-32">
-          <div className="flex flex-col gap-16 w-[35vw] items-center">
+          <div className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300" ref={contactRef}>
             <div>
               <h1 className="text-4xl tracking-tight text-center">Contact Me</h1>
               <p className="font-lato text-xl font-light text-center">
@@ -34,8 +76,8 @@ export const LetsTalk = () => {
               />
             </div>
           </div>
-          <div className="h-full w-px bg-secondaryColor mx-10"></div>
-          <div className="flex flex-col gap-16 w-[35vw] items-center">
+          <div className="h-full w-px bg-secondaryColor mx-10 transition-all duration-300" ref={lineRef}></div>
+          <div className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300" ref={socialRef}>
             <div>
               <h1 className="text-4xl tracking-tight text-center">Social Media</h1>
               <p className="font-lato text-xl font-light text-center">
