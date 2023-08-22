@@ -14,7 +14,7 @@ export const LiveLocation = () => {
         </h1>
         <div className="flex flex-row items-center gap-24 pt-10">
           <div className="flex flex-col items-center">
-            <div className="w-[50vw] h-[50vh] pt-10 pl-10 pr-10 pb-5">
+            <div className="w-[50vw] h-[60vh] pt-10 pl-10 pr-10 pb-5">
               <Map />
             </div>
             <div className="pl-10 pr-10">
@@ -31,12 +31,12 @@ export const LiveLocation = () => {
           </div>
           <div className="text-2xl font-lato pr-24 flex flex-col gap-y-12 text-center">
             <p>
-              On a serious note, I am currently still improving myself in the IT
+              Haha, on a serious note, I am currently still improving myself in the IT
               industry. Leveling up my skills in Fullstack Web Application
               Development.
             </p>
             <p>
-              I am also interested in trending tech such as Web3 and AI. Taking
+              I am also interested and is currently exploring trending tech such as Web3 and AI. Actively taking
               courses online to learn the basics of these.
             </p>
           </div>
