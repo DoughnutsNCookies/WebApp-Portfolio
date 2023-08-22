@@ -17,9 +17,9 @@ export const LetsTalk = () => {
       if (!letsTalk || !contact || !social || !line) return;
 
       const { top } = letsTalk.getBoundingClientRect();
-      if (top > window.innerHeight)
-        return;
-      const transform = ((window.innerHeight - top) / window.innerHeight * 100) - 100;
+      if (top > window.innerHeight) return;
+      const transform =
+        ((window.innerHeight - top) / window.innerHeight) * 100 - 100;
       contact.style.transform = `translateX(${transform}vw)`;
       social.style.transform = `translateX(${-transform}vw)`;
       line.style.opacity = `${top == 0 ? 100 : 50 + transform}%`;
@@ -41,17 +41,39 @@ export const LetsTalk = () => {
     contact.style.transform = `translateX(0vw)`;
     social.style.transform = `translateX(0vw)`;
     line.style.opacity = `100%`;
-  }, [showContact])
+  }, [showContact]);
 
   return (
     <section id="lets-talk" ref={letsTalkRef}>
       <div className="flex flex-col items-center h-screen">
-        <h1 className="text-5xl tracking-tighter pt-20" >Let's Talk!</h1>
+        <h1
+          className="text-6xl tracking-tighter pt-20"
+          style={{
+            textShadow: "10px 10px 25px #5ACEBA7D",
+          }}
+        >
+          Let's Talk!
+        </h1>
         <div className="flex flex-row items-center justify-center pt-32">
-          <div className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300" ref={contactRef}>
+          <div
+            className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300"
+            ref={contactRef}
+          >
             <div>
-              <h1 className="text-4xl tracking-tight text-center">Contact Me</h1>
-              <p className="font-lato text-xl font-light text-center">
+              <h1
+                className="text-4xl tracking-tight text-center"
+                style={{
+                  textShadow: "2px 2px 10px #5ACEBA7D",
+                }}
+              >
+                Contact Me
+              </h1>
+              <p
+                className="font-lato text-xl font-light text-center"
+                style={{
+                  textShadow: "2px 2px 10px #5ACEBA7D",
+                }}
+              >
                 I'm always open to freelance work or open-souce projects!
               </p>
             </div>
@@ -76,11 +98,29 @@ export const LetsTalk = () => {
               />
             </div>
           </div>
-          <div className="h-full w-px bg-secondaryColor mx-10 transition-all duration-300" ref={lineRef}></div>
-          <div className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300" ref={socialRef}>
+          <div
+            className="h-full w-px bg-secondaryColor mx-10 transition-all duration-300"
+            ref={lineRef}
+          ></div>
+          <div
+            className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300"
+            ref={socialRef}
+          >
             <div>
-              <h1 className="text-4xl tracking-tight text-center">Social Media</h1>
-              <p className="font-lato text-xl font-light text-center">
+              <h1
+                className="text-4xl tracking-tight text-center"
+                style={{
+                  textShadow: "2px 2px 10px #5ACEBA7D",
+                }}
+              >
+                Social Media
+              </h1>
+              <p
+                className="font-lato text-xl font-light text-center"
+                style={{
+                  textShadow: "2px 2px 10px #5ACEBA7D",
+                }}
+              >
                 Do remember to drop a follow if you find them interesting!
               </p>
             </div>
@@ -135,14 +175,32 @@ const Details = (props: DetailsProps) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            className={`fill-accentColor transition-all w-full mt-3 transform h-14 ${hover ? "scale-125" : "scale-100"}`}
+            className={`fill-accentColor transition-all w-full mt-3 transform h-14 ${
+              hover ? "scale-125" : "scale-100"
+            }`}
           >
             <path d={icon} />
           </svg>
         </div>
         <div className="flex flex-col">
-          <h1 className="text-2xl font-semibold tracking-tight">{type}</h1>
-          <p className={`transition-all hover:underline ${hover ? "underline" : ""}`}>{description}</p>
+          <h1
+            className="text-2xl font-semibold tracking-tight"
+            style={{
+              textShadow: "2px 2px 10px #5ACEBA7D",
+            }}
+          >
+            {type}
+          </h1>
+          <p
+            className={`transition-all hover:underline ${
+              hover ? "underline" : ""
+            }`}
+            style={{
+              textShadow: "2px 2px 10px #5ACEBA7D",
+            }}
+          >
+            {description}
+          </p>
         </div>
       </div>
     </a>
