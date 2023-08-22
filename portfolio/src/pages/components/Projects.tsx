@@ -26,7 +26,7 @@ const projectsLeft = [
   ),
   new Project(
     "Push Swap",
-    "Push Swap is a project that challenged sorting data on a stack using a limited set of instructions in C, aiming to achieve the lowest possible number of actions. I've learned to manipulate various types of sorting algorithms and choose the most appropriate and optimized solution for efficiently sorting data.",
+    "Push Swap challenges sorting data on a stack using a limited set of instructions in C, aiming to achieve the lowest possible number of actions. I've learned to manipulate various types of sorting algorithms and choose the most appropriate and optimized solution for efficiently sorting data.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Push_Swap"
   ),
 ];
@@ -34,12 +34,12 @@ const projectsLeft = [
 const projectsRight = [
   new Project(
     "Philosophers",
-    "The Philosopher project provided a learning experience in multithreading and multiprocessors in C, where I explored concurrent programming concepts. By recreating the dining philosophers' problem, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
+    "Philosophers provided a learning experience in multithreading and multiprocessors in C, where I explored concurrent programming concepts. By recreating the dining philosophers' problem, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Philosophers"
   ),
   new Project(
     "Minishell",
-    "Minishell is a project that involves building a shell in C, akin to bash. The project's includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses, which enables users to interact with the shell efficiently and flexibly.",
+    "Minishell involves building a shell in C, akin to bash. The project's includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses, which enables users to interact with the shell efficiently and flexibly.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Minishell"
   ),
   new Project(
