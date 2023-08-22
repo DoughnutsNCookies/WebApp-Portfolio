@@ -38,7 +38,7 @@ export const NavBar = () => {
       <ul className="flex flex-row py-2 justify-center items-center gap-x-20 font-playfair text-xl">
         <li>
           <button
-            className="text-2xl hover:text-accentColor transition-all"
+            className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setNavVisible(true);
               setEventIndex(0);
@@ -57,7 +57,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-2xl hover:text-accentColor transition-all"
+            className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setEventIndex(0);
               setDisplayEvent(true);
@@ -79,7 +79,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-2xl hover:text-accentColor transition-all"
+            className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setDisplayEvent(false);
               setShowProject(true);
@@ -100,7 +100,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-2xl hover:text-accentColor transition-all"
+            className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setDisplayEvent(false);
               setShowProject(false);
@@ -120,7 +120,7 @@ export const NavBar = () => {
         </li>
         <li className="bg-primaryColor py-2 px-4 rounded-md">
           <button
-            className="text-2xl hover:text-accentColor transition-all"
+            className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setDisplayEvent(false);
               setShowProject(false);

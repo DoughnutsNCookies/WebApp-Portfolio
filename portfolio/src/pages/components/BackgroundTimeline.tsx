@@ -322,7 +322,7 @@ const SkipButton = (props: SkipButtonProps) => {
 
   return (
     <button
-      className="w-52 flex flex-col mx-20 items-center py-1 font-lato text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl"
+      className="w-52 flex flex-col mx-20 items-center py-1 font-lato text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl scale-100 hover:scale-110 transition-all"
       onClick={() => {
         setEventIndex(beginning ? 0 : events.length - 1);
         window.scrollTo(
