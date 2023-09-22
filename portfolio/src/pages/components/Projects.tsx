@@ -113,7 +113,7 @@ export const Projects = () => {
   return (
     <section id="projects" ref={projectRef} className={`${showProject ? "opacity-100" : "opacity-0"} transition-all`}>
       <div
-        className="flex flex-row justify-between transition-all"
+        className="flex flex-row justify-between transition-all -z-10"
         style={{
           height: (projectsLeft.length + 1) * 100 + "vh",
         }}

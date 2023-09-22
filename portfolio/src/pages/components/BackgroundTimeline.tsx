@@ -222,12 +222,9 @@ export const BackgroundTimeline = () => {
           triangleRef={triangleRef}
           date={date}
           onEvent={events[eventIndex]}
+          setEventIndex={setEventIndex}
         />
         <TimeLine lineRef={lineRef} onEvent={events[eventIndex]} />
-        <div className="sticky top-[80vh] mb-[20vh] flex flex-row justify-between">
-          <SkipButton setEventIndex={setEventIndex} beginning={true} />
-          <SkipButton setEventIndex={setEventIndex} beginning={false} />
-        </div>
       </div>
     </section>
   );
@@ -237,23 +234,23 @@ interface DateIndicatorProps {
   triangleRef: React.RefObject<HTMLDivElement>;
   date: string;
   onEvent: TimelineEvent | null;
+  setEventIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const DateIndicator = (props: DateIndicatorProps) => {
-  const { triangleRef, date, onEvent } = props;
+  const { triangleRef, date, onEvent, setEventIndex } = props;
 
   return (
     <div
       ref={triangleRef}
-      className="sticky top-[18vh] mt-[25vh] w-[100vw]"
+      className="sticky top-[18vh] mb-[77vh] mt-[25vh] w-[100vw] h-[70px]"
       style={{
-        marginBottom: "77vh",
         transition: "transform 1s ease-in-out",
       }}
     >
       <p className="text-xl">{date}</p>
-      <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all" />
-      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor bg-backgroundColor text-secondaryColor p-10 rounded-md w-[60vw]">
+      <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all"/>
+      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor text-secondaryColor p-10 rounded-md h-[80vh] flex flex-col items-center">
         <h1
           className="text-6xl tracking-tight pb-6"
           style={{
@@ -263,13 +260,17 @@ const DateIndicator = (props: DateIndicatorProps) => {
           {onEvent?.title}
         </h1>
         <p
-          className="font-lato text-2xl tracking-wider"
+          className="font-lato text-2xl tracking-wider w-[60vw] h-[30vh]"
           style={{
             textShadow: "2px 2px 10px #5ACEBA7D",
           }}
         >
           {onEvent?.description}
         </p>
+        <div className="top-[80vh] mb-[20vh] flex flex-row justify-between w-[100vw]">
+          <SkipButton setEventIndex={setEventIndex} beginning={true} />
+          <SkipButton setEventIndex={setEventIndex} beginning={false} />
+        </div>
       </div>
     </div>
   );
@@ -344,11 +345,11 @@ const SkipButton = (props: SkipButtonProps) => {
           >
             <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
           </svg>
-          <p className="font-lato font-extrabold">Beginning</p>
+          <p className="font-lato font-extrabold cursor-pointer">Beginning</p>
         </div>
       ) : (
         <div className="flex flex-row items-center gap-4">
-          <p className="font-lato font-extrabold">Present</p>
+          <p className="font-lato font-extrabold cursor-pointer">Present</p>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="1em"

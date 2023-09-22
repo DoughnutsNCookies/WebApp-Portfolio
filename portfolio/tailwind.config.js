@@ -19,7 +19,11 @@ module.exports = {
         playfair: ["Playfair Display"],
         lato: ["Lato"],
       },
-      cursor: {},
+      cursor: {
+        default: "url(/cursor/smiley.svg), default",
+        pointer: "url(/cursor/pointy.svg), pointer",
+        text: "url(/cursor/texty.svg), text",
+      },
       animation: {
         "fade-in": "fade-in 3s ease-in-out forwards",
         title: "title 3s ease-out forwards",

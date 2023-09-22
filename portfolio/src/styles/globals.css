@@ -32,4 +32,17 @@ body {
   color: var(--text-color);
   overflow-x: hidden;
   scroll-behavior: smooth;
+  cursor: url('/cursor/smiley.svg'), default;
+}
+
+button {
+  cursor: url('/cursor/pointy.svg'), pointer;
+}
+
+h1 {
+  cursor: url('/cursor/texty.svg'), text;
+}
+
+p {
+  cursor: url('/cursor/texty.svg'), text;
 }

@@ -172,7 +172,7 @@ const Details = (props: DetailsProps) => {
     <a
       href={href}
       target="_blank"
-      className="font-lato font-light text-xl transition-all"
+      className="font-lato font-light text-xl transition-all cursor-pointer"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -190,7 +190,7 @@ const Details = (props: DetailsProps) => {
         </div>
         <div className="flex flex-col">
           <h1
-            className="text-2xl font-semibold tracking-tight"
+            className="text-2xl font-semibold tracking-tight cursor-pointer"
             style={{
               textShadow: "2px 2px 10px #5ACEBA7D",
             }}
@@ -198,7 +198,7 @@ const Details = (props: DetailsProps) => {
             {type}
           </h1>
           <p
-            className={`transition-all hover:underline ${
+            className={`transition-all hover:underline cursor-pointer ${
               hover ? "underline" : ""
             }`}
             style={{

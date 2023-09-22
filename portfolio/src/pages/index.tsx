@@ -39,6 +39,7 @@ export default function Home() {
               <NavBar />
               <HomePage />
               <BackgroundTimeline />
+              <div className="h-[50vh]"></div>
               <Projects />
               <div className="h-[50vh]"></div>
               <LiveLocation />
