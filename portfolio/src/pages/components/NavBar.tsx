@@ -81,15 +81,21 @@ export const NavBar = () => {
           <button
             className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
+              setEventIndex(14);
               setDisplayEvent(false);
               setShowProject(true);
               setResetProject(!resetProject);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" });
+              const projectsElement = document.getElementById("projects");
+              if (projectsElement) {
+                const scrollY = projectsElement.getBoundingClientRect().top + window.scrollY + 50;
+                window.scrollTo({
+                  top: scrollY,
+                  behavior: "smooth"
+                });
+              }
             }}
             style={{
               textShadow: "2px 2px 15px #5ACEBA7D",
@@ -102,6 +108,7 @@ export const NavBar = () => {
           <button
             className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
+              setEventIndex(14);
               setDisplayEvent(false);
               setShowProject(false);
               setTimeout(() => {
@@ -122,6 +129,7 @@ export const NavBar = () => {
           <button
             className="text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
+              setEventIndex(14);
               setDisplayEvent(false);
               setShowProject(false);
               setShowContact(true);

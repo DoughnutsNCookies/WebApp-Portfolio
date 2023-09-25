@@ -64,11 +64,9 @@ export const Projects = () => {
 
       const { top, bottom } = project.getBoundingClientRect();
       
-      setShowProject(true);
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
-        setShowProject(false);
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
         right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;
@@ -89,6 +87,7 @@ export const Projects = () => {
         ) {
           left.style.top = `-${window.innerHeight * i}px`;
           right.style.bottom = `-${window.innerHeight * i}px`;
+          setShowProject(true);
           break;
         }
       }
@@ -110,10 +109,17 @@ export const Projects = () => {
     right.style.bottom = `0px`;
   }, [resetProject])
 
+  useEffect(() => {
+    const project = projectRef.current;
+
+    if (!project) return;
+    project.style.opacity = showProject ? "1" : "0";
+  }, [showProject])
+
   return (
-    <section id="projects" ref={projectRef} className={`${showProject ? "opacity-100" : "opacity-0"} transition-all`}>
+    <section id="projects" ref={projectRef} className="transition-all">
       <div
-        className="flex flex-row justify-between transition-all -z-10"
+        className="flex flex-row justify-between transition-all mt-[20vh]"
         style={{
           height: (projectsLeft.length + 1) * 100 + "vh",
         }}

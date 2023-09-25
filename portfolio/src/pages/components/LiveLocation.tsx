@@ -19,7 +19,7 @@ export const LiveLocation = () => {
         </h1>
         <div className="flex flex-row items-center gap-24 pt-10">
           <div className="flex flex-col items-center">
-            <div className="w-[50vw] h-[60vh] pt-10 pl-10 pr-10 pb-5">
+            <div className="w-[50vw] h-[60vh] pt-10 pl-10 pr-10 pb-5 z-0">
               <Map />
             </div>
             <div className="pl-10 pr-10">

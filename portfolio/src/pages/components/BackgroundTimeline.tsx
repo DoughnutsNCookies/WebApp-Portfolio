@@ -163,6 +163,11 @@ export const BackgroundTimeline = () => {
       triangle.style.marginBottom = "0";
     }
 
+    if (index < 0)
+      index = 0;
+    else if (index > events.length - 1)
+      index = events.length - 1;
+
     const target = -events[index].positionRatio / 100;
     if (index === events.length - 2) {
       window.scrollTo(
@@ -222,6 +227,7 @@ export const BackgroundTimeline = () => {
           triangleRef={triangleRef}
           date={date}
           onEvent={events[eventIndex]}
+          end={eventIndex === events.length - 1}
           setEventIndex={setEventIndex}
         />
         <TimeLine lineRef={lineRef} onEvent={events[eventIndex]} />
@@ -234,16 +240,17 @@ interface DateIndicatorProps {
   triangleRef: React.RefObject<HTMLDivElement>;
   date: string;
   onEvent: TimelineEvent | null;
+  end: boolean;
   setEventIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const DateIndicator = (props: DateIndicatorProps) => {
-  const { triangleRef, date, onEvent, setEventIndex } = props;
+  const { triangleRef, date, onEvent, end, setEventIndex } = props;
 
   return (
     <div
       ref={triangleRef}
-      className="sticky top-[18vh] mb-[77vh] mt-[25vh] w-[100vw] h-[70px]"
+      className={`sticky top-[18vh] mb-[77vh] mt-[25vh] w-[100vw] ${end ? "h-[70px]" : "h-[50px]"}`}
       style={{
         transition: "transform 1s ease-in-out",
       }}

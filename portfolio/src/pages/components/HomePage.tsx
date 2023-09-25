@@ -1,6 +1,6 @@
 export const HomePage = () => {
   return (
-    <section id="home cursor-default">
+    <section id="home">
       <div className="flex flex-col items-center justify-center h-screen overflow-hidden from-black via-zinc-600/20 to-black">
         <nav className="animate-fade-in">
           <ul className="flex items-center justify-center gap-4"></ul>
