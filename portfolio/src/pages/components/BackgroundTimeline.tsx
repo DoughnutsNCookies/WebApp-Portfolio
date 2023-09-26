@@ -325,7 +325,7 @@ const TimeLine = (props: TimelineProps) => {
             onEvent === myEvent ? "w-6 h-6 -top-[14px]" : "w-4 h-4 -top-[10px]"
           } -translate-x-1/2 transition-all absolute rounded-full bg-accentColor`}
           style={{
-            left: `${myEvent.positionRatio.toPrecision(5).toString()}%`,
+            left: `${myEvent.positionRatio.toPrecision(3).toString()}%`,
           }}
         />
       ))}
