@@ -58,7 +58,8 @@ export const Projects = () => {
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
-      setIsMobile(window.innerWidth < window.innerHeight);
+      const mobileMode = window.innerWidth < window.innerHeight
+      setIsMobile(mobileMode);
       const project = projectRef.current;
       const left = leftRef.current;
       const right = rightRef.current;
@@ -71,8 +72,8 @@ export const Projects = () => {
         right.style.bottom = `100vh`;
         setShowProject(false);
       } else if (bottom < window.innerHeight) {
-        left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
-        right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;
+        left.style.top = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
+        right.style.bottom = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
         if (bottom < window.innerHeight * 2) setShowProject(false);
       }
 
@@ -83,7 +84,7 @@ export const Projects = () => {
       right.style.transform = `translateY(${event.deltaY > 0 ? 10 : -10}px)`;
       left.style.transform = `translateY(${event.deltaY > 0 ? -10 : 10}px)`;
 
-      for (let i = 0; i < (window.innerWidth < window.innerHeight ? projectsRight.length : 0) + projectsLeft.length; i++) {
+      for (let i = 0; i < (mobileMode ? projectsRight.length : 0) + projectsLeft.length; i++) {
         if (
           -top > window.innerHeight * i &&
           -top < window.innerHeight * (i + 1)
