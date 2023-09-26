@@ -10,16 +10,16 @@ export const LiveLocation = () => {
     <section id="live-location" className="flex flex-col items-center h-screen">
       <LocationContext.Provider value={{ city, setCity, prov, setProv }}>
         <h1
-          className="text-6xl tracking-tighter pt-20"
+          className="text-4xl lg:text-6xl tracking-tighter pt-12 lg:pt-20"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
         >
           Live Location: Where am I now?
         </h1>
-        <div className="flex flex-row items-center gap-24 pt-10">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 pt-10">
           <div className="flex flex-col items-center">
-            <div className="w-[50vw] h-[60vh] pt-10 pl-10 pr-10 pb-5 z-0">
+            <div className="w-[100vw] lg:w-[50vw] h-[40vh] lg:h-[60vh] lg:pt-10 pl-10 pr-10 pb-5 z-0">
               <Map />
             </div>
             <div className="pl-10 pr-10">
@@ -32,7 +32,7 @@ export const LiveLocation = () => {
                 {city}, {prov}
               </h1>
               <p
-                className="font-lato mt-4 text-xl text-center tracking-wide"
+                className="font-lato mt-4 text-sm lg:text-xl text-center tracking-wide"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -44,7 +44,7 @@ export const LiveLocation = () => {
               </p>
             </div>
           </div>
-          <div className="text-2xl font-lato pr-24 flex flex-col gap-y-12 text-center tracking-wide">
+          <div className="text-xl lg:text-2xl font-lato lg:pr-24 flex flex-col gap-y-6 lg:gap-y-12 text-center tracking-wide mx-6">
             <p
               style={{
                 textShadow: "2px 2px 10px #5ACEBA7D",
