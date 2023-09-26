@@ -9,7 +9,7 @@ export const LetsTalk = () => {
   const { showContact, setShowContact } = useContext(ContactContext);
 
   useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
+    const handleScroll = (event: any) => {
       const letsTalk = letsTalkRef.current;
       const contact = contactRef.current;
       const social = socialRef.current;
@@ -25,9 +25,9 @@ export const LetsTalk = () => {
       line.style.opacity = `${top == 0 ? 100 : 50 + transform}%`;
     };
 
-    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

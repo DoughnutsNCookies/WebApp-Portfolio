@@ -111,7 +111,7 @@ export const BackgroundTimeline = () => {
     useContext(EventContext);
 
   useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
+    const handleScroll = (event: any) => {
       if (movingTriangleRef.current) return;
 
       const background = backgroundRef.current;
@@ -142,9 +142,9 @@ export const BackgroundTimeline = () => {
       });
     };
 
-    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
