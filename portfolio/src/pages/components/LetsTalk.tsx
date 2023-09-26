@@ -16,7 +16,7 @@ export const LetsTalk = () => {
       const line = lineRef.current;
       if (!letsTalk || !contact || !social || !line) return;
 
-      const { top } = letsTalk.getBoundingClientRect();
+      const { top, bottom } = letsTalk.getBoundingClientRect();
       if (top > window.innerHeight) return;
       const transform =
         ((window.innerHeight - top) / window.innerHeight) * 100 - 100;
@@ -44,17 +44,17 @@ export const LetsTalk = () => {
   }, [showContact]);
 
   return (
-    <section id="lets-talk" ref={letsTalkRef}>
+    <section id="lets-talk" ref={letsTalkRef} className=" overflow-x-clip">
       <div className="flex flex-col items-center h-screen">
         <h1
-          className="text-5xl lg:text-6xl tracking-tighter pt-12 lg:pt-20"
+          className="text-5xl lg:text-6xl tracking-tighter pt-14 lg:pt-20"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
         >
           Let's Talk!
         </h1>
-        <div className="flex flex-col lg:flex-row items-center justify-center pt-16 lg:pt-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center pt-4 lg:pt-32">
           <div
             className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={contactRef}
@@ -69,7 +69,7 @@ export const LetsTalk = () => {
                 Contact Me
               </h1>
               <p
-                className="font-lato text-xl font-light text-center"
+                className="font-lato text-md font-light text-center"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -77,7 +77,7 @@ export const LetsTalk = () => {
                 I'm always open to freelance work or open-souce projects!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[25vh] lg:pl-0 pl-12 w-full lg:w-auto mb-5 lg:mb-0 lg:h-[40vh] justify-center">
+            <div className="flex flex-col lg:gap-6 h-[24vh] lg:pl-0 pl-12 w-full lg:w-auto mb-4 lg:mb-0 lg:h-[40vh] justify-center">
               <Details
                 type="WhatsApp"
                 description="+6016 3540 886"
@@ -99,11 +99,11 @@ export const LetsTalk = () => {
             </div>
           </div>
           <div
-            className="h-full w-px bg-secondaryColor mx-10 transition-all duration-300"
+            className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300"
             ref={lineRef}
           ></div>
           <div
-            className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
+            className="flex flex-col pt-5 lg:pt-0 lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={socialRef}
           >
             <div>
@@ -116,7 +116,7 @@ export const LetsTalk = () => {
                 Social Media
               </h1>
               <p
-                className="font-lato text-xl font-light text-center"
+                className="font-lato text-md font-light text-center"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -124,7 +124,7 @@ export const LetsTalk = () => {
                 Do remember to drop a follow if you find them interesting!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[35vh] lg:h-[40vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
+            <div className="flex flex-col lg:gap-6 h-[32vh] lg:h-[40vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
               <Details
                 type="GitHub"
                 description="github.com/DoughnutsNCookies"
@@ -176,12 +176,12 @@ const Details = (props: DetailsProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="flex flex-row items-center gap-3 lg:gap-5">
-        <div className="h-16 lg:h-20 w-20">
+      <div className="flex flex-row items-center lg:gap-5">
+        <div className="h-14 lg:h-20 w-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            className={`fill-accentColor transition-all w-full mt-4 lg:mt-3 transform h-12 lg:h-14 ${
+            className={`fill-accentColor transition-all w-full mt-4 lg:mt-3 transform h-10 lg:h-14 ${
               hover ? "scale-125" : "scale-100"
             }`}
           >
@@ -190,7 +190,7 @@ const Details = (props: DetailsProps) => {
         </div>
         <div className="flex flex-col">
           <h1
-            className="text-xl lg:text-2xl font-semibold tracking-tight cursor-pointer"
+            className="text-md lg:text-2xl font-semibold tracking-tight cursor-pointer"
             style={{
               textShadow: "2px 2px 10px #5ACEBA7D",
             }}
@@ -198,7 +198,7 @@ const Details = (props: DetailsProps) => {
             {type}
           </h1>
           <p
-            className={`transition-all hover:underline cursor-pointer ${
+            className={`text-xs transition-all hover:underline cursor-pointer ${
               hover ? "underline" : ""
             }`}
             style={{
