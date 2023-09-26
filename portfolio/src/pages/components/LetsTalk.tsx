@@ -69,7 +69,7 @@ export const LetsTalk = () => {
                 Contact Me
               </h1>
               <p
-                className="font-lato text-md font-light text-center"
+                className="font-lato text-md font-light text-center px-4"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -116,7 +116,7 @@ export const LetsTalk = () => {
                 Social Media
               </h1>
               <p
-                className="font-lato text-md font-light text-center"
+                className="font-lato text-md font-light text-center px-4"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
