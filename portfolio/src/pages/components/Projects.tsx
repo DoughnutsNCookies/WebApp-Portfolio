@@ -57,7 +57,7 @@ export const Projects = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
+    const handleScroll = (event: any) => {
       const mobileMode = window.innerWidth < window.innerHeight
       setIsMobile(mobileMode);
       const project = projectRef.current;
@@ -97,9 +97,9 @@ export const Projects = () => {
       }
     };
 
-    window.addEventListener("wheel", handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
