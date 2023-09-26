@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { use, useContext, useEffect, useRef, useState } from "react";
 import ProjectContext from "../contexts/ProjectContext";
 
 class Project {
@@ -54,9 +54,11 @@ export const Projects = () => {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const { resetProject, showProject, setShowProject } = useContext(ProjectContext);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
+      setIsMobile(window.innerWidth < window.innerHeight);
       const project = projectRef.current;
       const left = leftRef.current;
       const right = rightRef.current;
@@ -81,7 +83,7 @@ export const Projects = () => {
       right.style.transform = `translateY(${event.deltaY > 0 ? 10 : -10}px)`;
       left.style.transform = `translateY(${event.deltaY > 0 ? -10 : 10}px)`;
 
-      for (let i = 0; i < projectsLeft.length; i++) {
+      for (let i = 0; i < (window.innerWidth < window.innerHeight ? projectsRight.length : 0) + projectsLeft.length; i++) {
         if (
           -top > window.innerHeight * i &&
           -top < window.innerHeight * (i + 1)
@@ -122,11 +124,11 @@ export const Projects = () => {
       <div
         className="flex flex-row justify-between transition-all mt-[20vh]"
         style={{
-          height: (projectsLeft.length + 1) * 100 + "vh",
+          height: ((isMobile ? projectsRight.length : 0) + projectsLeft.length + 1) * 100 + "vh",
         }}
       >
-        <ProjectCards projects={projectsLeft} reff={leftRef} left={true} />
-        <ProjectCards projects={projectsRight} reff={rightRef} left={false} />
+        <ProjectCards projects={isMobile ? [...projectsLeft, ...projectsRight] : projectsRight} reff={rightRef} left={false} isMobile={isMobile}/>
+        <ProjectCards projects={isMobile ? [...projectsLeft, ...projectsRight] : projectsLeft} reff={leftRef} left={true} isMobile={isMobile}/>
       </div>
     </section>
   );
@@ -136,23 +138,26 @@ interface ProjectCardProps {
   projects: Project[];
   reff: React.RefObject<HTMLDivElement>;
   left: boolean;
+  isMobile: boolean;
 }
 
 const ProjectCards = (props: ProjectCardProps) => {
-  const { projects, reff, left } = props;
+  const { projects, reff, left, isMobile } = props;
 
   const style = left ? { top: "100vh" } : { bottom: "100vh" };
   return (
     <div
       className={`${
         left ? "left-0" : "right-0"
-      } fixed w-1/2 flex flex-col transition-all duration-300`}
+      } ${
+        isMobile ? "w-full" : "w-1/2"
+      } fixed flex flex-col transition-all duration-300`}
       style={style}
       ref={reff}
     >
       {projects.map((project: Project, index: number) => (
         <div className="h-screen flex items-center" key={index}>
-          <div className="flex flex-col justify-between h-[80vh] w-full m-10 border-4 rounded-xl bg-secondaryColor text-center px-10">
+          <div className="flex flex-col justify-between h-[85vh] lg:h-[80vh] w-full m-5 lg:m-10 border-4 rounded-xl bg-secondaryColor text-center px-5 lg:px-10">
             <div>
               <h1 className="text-6xl py-4 tracking-tight text-secondaryBackgroundColor">
                 {project.title}
@@ -166,13 +171,15 @@ const ProjectCards = (props: ProjectCardProps) => {
                 {project.description}
               </p>
             </div>
-            <a
-              href={project.link}
-              target="_blank"
-              className="pb-4 text-2xl font-lato text-secondaryBackgroundColor hover:underline font-extrabold transition-all scale-100 hover:scale-110"
-            >
-              Project GitHub
-            </a>
+            <button className="my-3 mx-[20vw] lg:mx-[10vw] p-2 scale-100 hover:scale-110 transition-all border-4 border-backgroundColor rounded-lg bg-backgroundColor">
+              <a
+                href={project.link}
+                target="_blank"
+                className="text-2xl font-lato text-secondaryColor hover:underline font-extrabold"
+              >
+                Project GitHub
+              </a>
+            </button>
           </div>
         </div>
       ))}
@@ -195,7 +202,7 @@ const Image = (props: ImageProps) => {
       <img
         src={hover ? gif : image}
         alt={`${projectName} Image`}
-        className="w-full h-[40vh] rounded-xl"
+        className="w-full h-[30vh] lg:h-[40vh] rounded-xl"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       />
