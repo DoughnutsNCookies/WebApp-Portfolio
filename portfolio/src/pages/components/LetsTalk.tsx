@@ -47,7 +47,7 @@ export const LetsTalk = () => {
     <section id="lets-talk" ref={letsTalkRef} className=" overflow-x-clip">
       <div className="flex flex-col items-center h-screen">
         <h1
-          className="text-5xl lg:text-6xl tracking-tighter pt-14 lg:pt-20"
+          className="text-5xl lg:text-6xl tracking-tighter pt-10 lg:pt-20"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
@@ -181,7 +181,7 @@ const Details = (props: DetailsProps) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            className={`fill-accentColor transition-all w-full mt-4 lg:mt-3 transform h-10 lg:h-14 ${
+            className={`fill-accentColor transition-all w-full mt-3 transform h-10 lg:h-14 ${
               hover ? "scale-125" : "scale-100"
             }`}
           >

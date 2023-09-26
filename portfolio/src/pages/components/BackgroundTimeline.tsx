@@ -280,7 +280,7 @@ const DateIndicator = (props: DateIndicatorProps) => {
           {onEvent?.title}
         </h1>
         <p
-          className="font-lato text-xl lg:text-2xl tracking-wider w-[90vw] lg:w-[60vw] h-[40vh] lg:h-[30vh]"
+          className="font-lato text-xl lg:text-2xl tracking-wider w-[90vw] lg:w-[60vw] h-[30vh] lg:h-[30vh]"
           style={{
             textShadow: "2px 2px 10px #5ACEBA7D",
           }}

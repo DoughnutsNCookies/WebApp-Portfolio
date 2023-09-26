@@ -17,7 +17,7 @@ export const LiveLocation = () => {
         >
           Live Location: Where am I now?
         </h1>
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24 pt-6 lg:pt-10">
+        <div className="flex flex-col lg:flex-row items-center gap-7 lg:gap-24 pt-6 lg:pt-10">
           <div className="flex flex-col items-center">
             <div className="w-[100vw] lg:w-[50vw] h-[30vh] lg:h-[60vh] lg:pt-10 pl-5 lg:pl-10 pr-5 lg:pr-10 pb-5 z-0">
               <Map />
@@ -44,7 +44,7 @@ export const LiveLocation = () => {
               </p>
             </div>
           </div>
-          <div className="text-xl lg:text-2xl font-lato lg:pr-24 flex flex-col gap-y-6 lg:gap-y-12 text-center tracking-wide mx-6">
+          <div className="text-md lg:text-2xl font-lato lg:pr-24 flex flex-col gap-y-6 lg:gap-y-12 text-center tracking-wide mx-6">
             <p
               style={{
                 textShadow: "2px 2px 10px #5ACEBA7D",
