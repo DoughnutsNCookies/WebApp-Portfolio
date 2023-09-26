@@ -47,21 +47,21 @@ export const LetsTalk = () => {
     <section id="lets-talk" ref={letsTalkRef}>
       <div className="flex flex-col items-center h-screen">
         <h1
-          className="text-6xl tracking-tighter pt-20"
+          className="text-5xl lg:text-6xl tracking-tighter pt-12 lg:pt-20"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
         >
           Let's Talk!
         </h1>
-        <div className="flex flex-row items-center justify-center pt-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center pt-8 lg:pt-32">
           <div
-            className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300"
+            className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={contactRef}
           >
             <div>
               <h1
-                className="text-4xl tracking-tight text-center"
+                className="text-3xl lg:text-4xl tracking-tight text-center"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -77,7 +77,7 @@ export const LetsTalk = () => {
                 I'm always open to freelance work or open-souce projects!
               </p>
             </div>
-            <div className="flex flex-col gap-6 h-[40vh] justify-center">
+            <div className="flex flex-col lg:gap-6 h-[30vh] lg:pl-0 pl-12 w-full lg:w-auto mb-5 lg:h-[40vh] justify-center">
               <Details
                 type="WhatsApp"
                 description="+6016 3540 886"
@@ -103,12 +103,12 @@ export const LetsTalk = () => {
             ref={lineRef}
           ></div>
           <div
-            className="flex flex-col gap-16 w-[35vw] items-center transition-all duration-300"
+            className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={socialRef}
           >
             <div>
               <h1
-                className="text-4xl tracking-tight text-center"
+                className="text-3xl lg:text-4xl tracking-tight text-center"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
@@ -124,7 +124,7 @@ export const LetsTalk = () => {
                 Do remember to drop a follow if you find them interesting!
               </p>
             </div>
-            <div className="flex flex-col gap-6 h-[40vh] justify-center">
+            <div className="flex flex-col lg:gap-6 h-[40vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
               <Details
                 type="GitHub"
                 description="github.com/DoughnutsNCookies"
