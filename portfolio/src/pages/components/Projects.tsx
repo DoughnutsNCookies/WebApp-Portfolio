@@ -67,6 +67,7 @@ export const Projects = () => {
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
+        setShowProject(false);
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
         right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;

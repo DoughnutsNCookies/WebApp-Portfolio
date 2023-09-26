@@ -257,9 +257,9 @@ const DateIndicator = (props: DateIndicatorProps) => {
     >
       <p className="text-xl">{date}</p>
       <div className="ml-[50vw] -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-t-[25px] border-t-accentColor border-r-[12px] border-r-transparent transition-all"/>
-      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor text-secondaryColor p-10 rounded-md h-[80vh] flex flex-col items-center">
+      <div className="absolute top-[20vh] left-1/2 -translate-x-1/2 transition-all border-2 border-backgroundColor text-secondaryColor p-10 rounded-md lg:h-[80vh] flex flex-col items-center">
         <h1
-          className="text-6xl tracking-tight pb-6"
+          className="text-5xl lg:text-6xl tracking-tight pb-6"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
@@ -267,7 +267,7 @@ const DateIndicator = (props: DateIndicatorProps) => {
           {onEvent?.title}
         </h1>
         <p
-          className="font-lato text-2xl tracking-wider w-[60vw] h-[30vh]"
+          className="font-lato text-xl lg:text-2xl tracking-wider w-[90vw] lg:w-[60vw] h-[40vh] lg:h-[30vh]"
           style={{
             textShadow: "2px 2px 10px #5ACEBA7D",
           }}
@@ -330,7 +330,7 @@ const SkipButton = (props: SkipButtonProps) => {
 
   return (
     <button
-      className="w-52 flex flex-col mx-20 items-center py-1 font-lato text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl scale-100 hover:scale-110 transition-all"
+      className="w-52 flex flex-col lg:mx-20 items-center py-1 mx-8 font-lato text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl scale-100 hover:scale-110 transition-all"
       onClick={() => {
         setEventIndex(beginning ? 0 : events.length - 1);
         window.scrollTo(
