@@ -38,7 +38,7 @@ export const NavBar = () => {
       <ul className="flex flex-row py-2 justify-center items-center gap-x-7 lg:gap-x-20 font-playfair">
         <li>
           <button
-            className="text-sm lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
+            className="text-lg lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setNavVisible(true);
               setEventIndex(0);
@@ -57,7 +57,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-sm lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
+            className="text-lg lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setEventIndex(0);
               setDisplayEvent(true);
@@ -79,7 +79,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-sm lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
+            className="text-lg lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
@@ -106,7 +106,7 @@ export const NavBar = () => {
         </li>
         <li>
           <button
-            className="text-sm lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
+            className="text-lg lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
@@ -127,7 +127,7 @@ export const NavBar = () => {
         </li>
         <li className="bg-primaryColor py-1 lg:py-2 px-4 rounded-md">
           <button
-            className="text-sm lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
+            className="text-lg lg:text-2xl hover:text-accentColor transition-all scale-100 hover:scale-105"
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
