@@ -152,6 +152,8 @@ const ProjectCards = (props: ProjectCardProps) => {
         left ? "left-0" : "right-0"
       } ${
         isMobile ? "w-full" : "w-1/2"
+      } ${
+        !left && isMobile ? "hidden" : ""
       } fixed flex flex-col transition-all duration-300`}
       style={style}
       ref={reff}

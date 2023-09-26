@@ -111,6 +111,9 @@ export const BackgroundTimeline = () => {
     useContext(EventContext);
 
   useEffect(() => {
+    let lastKnownScrollPosition = 0;
+    let deltaY = 0;
+
     const handleScroll = (event: any) => {
       if (movingTriangleRef.current) return;
 
@@ -131,8 +134,18 @@ export const BackgroundTimeline = () => {
         return;
       }
 
+      let ticking = false;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          deltaY = window.scrollY - lastKnownScrollPosition;
+          lastKnownScrollPosition = window.scrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+
       setEventIndex((prev: number) => {
-        return event.deltaY < 0
+        return deltaY < 0
           ? prev === 0
             ? prev
             : prev - 1
