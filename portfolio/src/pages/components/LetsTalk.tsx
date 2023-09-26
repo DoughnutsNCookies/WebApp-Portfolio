@@ -54,7 +54,7 @@ export const LetsTalk = () => {
         >
           Let's Talk!
         </h1>
-        <div className="flex flex-col lg:flex-row items-center justify-center pt-8 lg:pt-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center pt-16 lg:pt-32">
           <div
             className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={contactRef}
@@ -77,7 +77,7 @@ export const LetsTalk = () => {
                 I'm always open to freelance work or open-souce projects!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[30vh] lg:pl-0 pl-12 w-full lg:w-auto mb-5 lg:h-[40vh] justify-center">
+            <div className="flex flex-col lg:gap-6 h-[25vh] lg:pl-0 pl-12 w-full lg:w-auto mb-5 lg:mb-0 lg:h-[40vh] justify-center">
               <Details
                 type="WhatsApp"
                 description="+6016 3540 886"
@@ -124,7 +124,7 @@ export const LetsTalk = () => {
                 Do remember to drop a follow if you find them interesting!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[40vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
+            <div className="flex flex-col lg:gap-6 h-[35vh] lg:h-[40vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
               <Details
                 type="GitHub"
                 description="github.com/DoughnutsNCookies"
@@ -172,16 +172,16 @@ const Details = (props: DetailsProps) => {
     <a
       href={href}
       target="_blank"
-      className="font-lato font-light text-xl transition-all cursor-pointer"
+      className="font-lato font-light text-md lg:text-xl transition-all cursor-pointer"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="flex flex-row items-center gap-5">
-        <div className="h-20 w-20">
+      <div className="flex flex-row items-center gap-3 lg:gap-5">
+        <div className="h-16 lg:h-20 w-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            className={`fill-accentColor transition-all w-full mt-3 transform h-14 ${
+            className={`fill-accentColor transition-all w-full mt-4 lg:mt-3 transform h-12 lg:h-14 ${
               hover ? "scale-125" : "scale-100"
             }`}
           >
@@ -190,7 +190,7 @@ const Details = (props: DetailsProps) => {
         </div>
         <div className="flex flex-col">
           <h1
-            className="text-2xl font-semibold tracking-tight cursor-pointer"
+            className="text-xl lg:text-2xl font-semibold tracking-tight cursor-pointer"
             style={{
               textShadow: "2px 2px 10px #5ACEBA7D",
             }}
