@@ -6,9 +6,6 @@ import Projects from "./components/Projects";
 import LiveLocation from "./components/LiveLocation";
 import LetsTalk from "./components/LetsTalk";
 import Background from "./components/Background";
-import EventContext from "./contexts/EventContext";
-import ProjectContext from "./contexts/ProjectContext";
-import ContactContext from "./contexts/ContactContext";
 
 export default function Home() {
   const [eventIndex, setEventIndex] = useState<number>(0);
@@ -25,29 +22,14 @@ export default function Home() {
         className="translate-all h-full w-full font-playfair"
         style={{ scrollBehavior: "smooth" }}
       >
-        <EventContext.Provider
-          value={{ displayEvent, setDisplayEvent, eventIndex, setEventIndex }}
-        >
-          <ProjectContext.Provider
-            value={{
-              resetProject,
-              setResetProject,
-              showProject,
-              setShowProject,
-            }}
-          >
-            <ContactContext.Provider value={{ showContact, setShowContact }}>
-              <NavBar />
-              <HomePage />
-              <BackgroundTimeline />
-              <div className="h-[100vh] lg:h-[50vh]"></div>
-              <Projects />
-              <div className="h-[50vh]"></div>
-              <LiveLocation />
-              <LetsTalk />
-            </ContactContext.Provider>
-          </ProjectContext.Provider>
-        </EventContext.Provider>
+        <NavBar setShowContact={setShowContact} resetProject={resetProject} setResetProject={setResetProject} setShowProject={setShowProject} setDisplayEvent={setDisplayEvent} setEventIndex={setEventIndex} />
+        <HomePage />
+        <BackgroundTimeline displayEvent={displayEvent} setDisplayEvent={setDisplayEvent} eventIndex={eventIndex} setEventIndex={setEventIndex} />
+        <div className="h-[100vh] lg:h-[50vh]"></div>
+        <Projects resetProject={resetProject} showProject={showProject} setShowProject={setShowProject} />
+        <div className="h-[50vh]"></div>
+        <LiveLocation />
+        <LetsTalk showContact={showContact} setShowContact={setShowContact} />
       </div>
     </main>
   );

@@ -1,5 +1,4 @@
-import { use, useContext, useEffect, useRef, useState } from "react";
-import ProjectContext from "../contexts/ProjectContext";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 class Project {
@@ -50,11 +49,17 @@ const projectsRight = [
   ),
 ];
 
-const Projects = () => {
+interface ProjectsProps {
+  resetProject: boolean;
+  showProject: boolean;
+  setShowProject: (showProject: boolean) => void;
+}
+
+const Projects = (props: ProjectsProps) => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-  const { resetProject, showProject, setShowProject } = useContext(ProjectContext);
+  const { resetProject, showProject, setShowProject } = props;
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

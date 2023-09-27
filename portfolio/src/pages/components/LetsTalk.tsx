@@ -1,12 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import ContactContext from "../contexts/ContactContext";
+import { useEffect, useRef, useState } from "react";
 
-const LetsTalk = () => {
+interface LetsTalkProps {
+  showContact: boolean;
+  setShowContact: (show: boolean) => void;
+}
+
+const LetsTalk = (props: LetsTalkProps) => {
   const letsTalkRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const socialRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
-  const { showContact, setShowContact } = useContext(ContactContext);
+  const { showContact, setShowContact } = props;
 
   useEffect(() => {
     const handleScroll = (event: any) => {

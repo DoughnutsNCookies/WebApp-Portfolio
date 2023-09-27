@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import EventContext from "../contexts/EventContext";
+import { useEffect, useRef, useState } from "react";
 
 class TimelineEvent {
   constructor(date: Date, title: string, description: string) {
@@ -101,14 +100,20 @@ const events = [
   ),
 ];
 
-const BackgroundTimeline = () => {
+interface BackgroundTimelineProps {
+  displayEvent: boolean;
+  setDisplayEvent: (display: boolean) => void;
+  eventIndex: number;
+  setEventIndex: (index: any) => void;
+}
+
+const BackgroundTimeline = (props: BackgroundTimelineProps) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const triangleRef = useRef<HTMLDivElement>(null);
   const movingTriangleRef = useRef<boolean>(false);
   const [date, setDate] = useState<string>("");
-  const { displayEvent, setDisplayEvent, eventIndex, setEventIndex } =
-    useContext(EventContext);
+  const { displayEvent, setDisplayEvent, eventIndex, setEventIndex } = props;
 
   useEffect(() => {
     let lastKnownScrollPosition = 0;

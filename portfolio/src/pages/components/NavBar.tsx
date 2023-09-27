@@ -1,15 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import EventContext from "../contexts/EventContext";
-import ProjectContext from "../contexts/ProjectContext";
-import ContactContext from "../contexts/ContactContext";
+import { useEffect, useState } from "react";
 
-const NavBar = () => {
+interface NavBarProps {
+  setShowContact: (showContact: boolean) => void;
+  resetProject: boolean;
+  setResetProject: (resetProject: boolean) => void;
+  setShowProject: (showProject: boolean) => void;
+  setDisplayEvent: (displayEvent: boolean) => void;
+  setEventIndex: (eventIndex: number) => void;
+}
+
+const NavBar = (props: NavBarProps) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [firstLoad, setFirstLoad] = useState(true);
   const [NavVisible, setNavVisible] = useState(true);
-  const { setDisplayEvent, setEventIndex } = useContext(EventContext);
-  const { resetProject, setResetProject, setShowProject} = useContext(ProjectContext);
-  const { showContact, setShowContact } = useContext(ContactContext);
+  const { setShowContact, setShowProject, resetProject, setResetProject, setDisplayEvent, setEventIndex } = props;
 
   useEffect(() => {
     const handleScroll = () => {
