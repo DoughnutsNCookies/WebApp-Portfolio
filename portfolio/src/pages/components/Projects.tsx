@@ -1,5 +1,6 @@
 import { use, useContext, useEffect, useRef, useState } from "react";
 import ProjectContext from "../contexts/ProjectContext";
+import Image from "next/image";
 
 class Project {
   constructor(title: string, description: string, link: string) {
@@ -49,7 +50,7 @@ const projectsRight = [
   ),
 ];
 
-export const Projects = () => {
+const Projects = () => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
@@ -144,6 +145,7 @@ interface ProjectCardProps {
 
 const ProjectCards = (props: ProjectCardProps) => {
   const { projects, reff, left, isMobile } = props;
+  const [hover, setHover] = useState(false);
 
   const style = left ? { top: "100vh" } : { bottom: "100vh" };
   return (
@@ -166,9 +168,13 @@ const ProjectCards = (props: ProjectCardProps) => {
                 {project.title}
               </h1>
               <Image
-                projectName={project.title}
-                image={`assets/${project.title}-image.png`}
-                gif={`assets/${project.title}-gif.gif`}
+                src={hover ? `/assets/${project.title}-gif.gif` : `/assets/${project.title}-image.png`}
+                alt={`${project.title} Image`}
+                width={1920}
+                height={1080}
+                className="h-[30vh] lg:h-[40vh] rounded-xl"
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
               />
               <p className="font-lato text-lg lg:text-xl text-secondaryBackgroundColor pt-4">
                 {project.description}
@@ -190,25 +196,4 @@ const ProjectCards = (props: ProjectCardProps) => {
   );
 };
 
-interface ImageProps {
-  projectName: string;
-  image: string;
-  gif: string;
-}
-
-const Image = (props: ImageProps) => {
-  const { projectName, image, gif } = props;
-  const [hover, setHover] = useState(false);
-
-  return (
-    <div>
-      <img
-        src={hover ? gif : image}
-        alt={`${projectName} Image`}
-        className="w-[100vw] h-[30vh] lg:h-[40vh] rounded-xl"
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      />
-    </div>
-  );
-};
+export default Projects;

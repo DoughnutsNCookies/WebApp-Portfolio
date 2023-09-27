@@ -1,4 +1,4 @@
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <section id="home">
       <div className="flex flex-col items-center justify-center h-screen overflow-hidden from-black via-zinc-600/20 to-black">
@@ -7,7 +7,7 @@ export const HomePage = () => {
         </nav>
         <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <h1 className="cursor-text z-10 text-transparent duration-1000 bg-white text-edge-outline animate-title text-5xl lg:text-9xl whitespace-nowrap bg-clip-text tracking-tighter">
-          I'm Sean Chuah
+          I&apos;m Sean Chuah
         </h1>
         <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
         <div className="text-center animate-fade-in text-xl lg:text-3xl font-lato font-light tracking-wide" style={{
@@ -19,3 +19,5 @@ export const HomePage = () => {
     </section>
   );
 };
+
+export default HomePage;

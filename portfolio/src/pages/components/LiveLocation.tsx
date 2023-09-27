@@ -2,7 +2,7 @@ import React from "react";
 import Map from "./Map";
 import LocationContext from "../contexts/LocationContext";
 
-export const LiveLocation = () => {
+const LiveLocation = () => {
   const [city, setCity] = React.useState<string>("");
   const [prov, setProv] = React.useState<string>("");
 
@@ -69,3 +69,5 @@ export const LiveLocation = () => {
     </section>
   );
 };
+
+export default LiveLocation;

@@ -3,7 +3,7 @@ import EventContext from "../contexts/EventContext";
 import ProjectContext from "../contexts/ProjectContext";
 import ContactContext from "../contexts/ContactContext";
 
-export const NavBar = () => {
+const NavBar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [firstLoad, setFirstLoad] = useState(true);
   const [NavVisible, setNavVisible] = useState(true);
@@ -141,10 +141,12 @@ export const NavBar = () => {
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Let's Talk
+            Let&apos;s Talk
           </button>
         </li>
       </ul>
     </nav>
   );
 };
+
+export default NavBar;

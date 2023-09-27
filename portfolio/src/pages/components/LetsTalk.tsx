@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import ContactContext from "../contexts/ContactContext";
 
-export const LetsTalk = () => {
+const LetsTalk = () => {
   const letsTalkRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const socialRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ export const LetsTalk = () => {
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
         >
-          Let's Talk!
+          Let&apos;s Talk!
         </h1>
         <div className="flex flex-col lg:flex-row items-center justify-center pt-4 lg:pt-32">
           <div
@@ -74,7 +74,7 @@ export const LetsTalk = () => {
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
               >
-                I'm always open to freelance work or open-souce projects!
+                I&apos;m always open to freelance work or open-souce projects!
               </p>
             </div>
             <div className="flex flex-col lg:gap-6 h-[24vh] lg:pl-0 pl-12 w-full lg:w-auto mb-4 lg:mb-0 lg:h-[40vh] justify-center">
@@ -212,3 +212,5 @@ const Details = (props: DetailsProps) => {
     </a>
   );
 };
+
+export default LetsTalk;

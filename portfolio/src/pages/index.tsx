@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { NavBar } from "./components/NavBar";
-import { HomePage } from "./components/HomePage";
-import { BackgroundTimeline } from "./components/BackgroundTimeline";
-import { Projects } from "./components/Projects";
-import { LiveLocation } from "./components/LiveLocation";
-import { LetsTalk } from "./components/LetsTalk";
-import { Background } from "./components/Background";
+import NavBar from "./components/NavBar";
+import HomePage from "./components/HomePage";
+import BackgroundTimeline from "./components/BackgroundTimeline";
+import Projects from "./components/Projects";
+import LiveLocation from "./components/LiveLocation";
+import LetsTalk from "./components/LetsTalk";
+import Background from "./components/Background";
 import EventContext from "./contexts/EventContext";
 import ProjectContext from "./contexts/ProjectContext";
 import ContactContext from "./contexts/ContactContext";
@@ -19,6 +19,7 @@ export default function Home() {
 
   return (
     <main>
+      <title>Sean Chuah</title>
       <Background />
       <div
         className="translate-all h-full w-full font-playfair"

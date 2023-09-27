@@ -34,7 +34,7 @@ const useMousePosition = () => {
   return mousePosition;
 };
 
-export const Background = ({
+const Background = ({
   quantity = 200,
   staticity = 50,
   ease = 50,
@@ -250,3 +250,5 @@ export const Background = ({
     </div>
   );
 };
+
+export default Background;

@@ -101,7 +101,7 @@ const events = [
   ),
 ];
 
-export const BackgroundTimeline = () => {
+const BackgroundTimeline = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const triangleRef = useRef<HTMLDivElement>(null);
@@ -382,3 +382,5 @@ const SkipButton = (props: SkipButtonProps) => {
     </button>
   );
 };
+
+export default BackgroundTimeline;

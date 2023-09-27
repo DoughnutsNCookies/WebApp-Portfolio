@@ -2,7 +2,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
-export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
+const getRandomLocation = async (
+  req: NextApiRequest,
+  res: NextApiResponse<any>
+) => {
   try {
     const response = await axios.get(
       "https://api.3geonames.org/?randomland=MY&json=1"
@@ -12,3 +15,5 @@ export default async (req: NextApiRequest, res: NextApiResponse<any>) => {
     res.status(500).json({ error: "Something boomed" });
   }
 };
+
+export default getRandomLocation;
