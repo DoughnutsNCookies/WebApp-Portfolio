@@ -16,7 +16,7 @@ class Project {
 const projectsLeft = [
   new Project(
     "PongSH",
-    "PongSH is a web application that offers users the experience of playing modern Pong. The app includes additional features like friend management and chat functionality. With a terminal theme design, PongSH brings a nostalgic touch to the gaming interface, appealing to both retro and contemporary gaming enthusiasts.",
+    "PongSH is a web application that offers users the experience of playing modern Pong. The app includes features like friend management and chat functionality, and with a terminal theme design, it brings a nostalgic touch to the gaming interface.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Ft_transcendence"
   ),
   new Project(
@@ -26,7 +26,7 @@ const projectsLeft = [
   ),
   new Project(
     "Push Swap",
-    "Push Swap challenges sorting data on a stack using a limited set of instructions in C, aiming to achieve the lowest possible number of actions. I've learned to manipulate various types of sorting algorithms and choose the most appropriate and optimized solution for efficiently sorting data.",
+    "Push Swap challenges sorting data on a stack using a limited set of instructions in C, aiming to achieve the lowest possible number of actions. I've learned to manipulate various types of sorting algorithms and choose the most appropriate and optimized solution for efficient data sorting.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Push_Swap"
   ),
 ];
@@ -34,17 +34,17 @@ const projectsLeft = [
 const projectsRight = [
   new Project(
     "Philosophers",
-    "Philosophers provided a learning experience in multithreading and multiprocessors in C, where I explored concurrent programming concepts. By recreating the dining philosophers' problem, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
+    "Philosophers provided a learning experience in multithreading and multiprocessors in C. By recreating the dining philosophers' problem, I was able to delve into the challenges of synchronizing multiple threads or processes to avoid deadlocks and ensure fair resource allocation.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Philosophers"
   ),
   new Project(
     "Minishell",
-    "Minishell involves building a shell in C, akin to bash. The project's includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses, which enables users to interact with the shell efficiently and flexibly.",
+    "Minishell involves building a shell in C, akin to bash. The project's includes working history, redirections, pipes, environment variables, signals, built-in functions, and advanced operators like '&&' and '||' with support for parentheses.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Minishell"
   ),
   new Project(
-    "Webserv",
-    "Webserv is an HTTP server project written in C++ 98, drawing inspiration from Nginx configuration and behaviors. It handles common methods such as GET, POST, PUT, DELETE, and HEAD methods, cookie and session management, as well as supporting multiple Common Gateway Interface (CGI) scripts.",
+    "WebServ",
+    "WebServ is an HTTP server project written in C++ 98, drawing inspiration from Nginx configuration and behaviors. It handles common methods such as GET, POST, PUT, DELETE, and HEAD methods, cookie and session management, as well as supporting multiple Common Gateway Interface (CGI) scripts.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Webserv"
   ),
 ];
@@ -160,15 +160,6 @@ const ProjectCards = (props: ProjectCardProps) => {
     height = window.innerHeight;
   }, [isMobile])
 
-  const handleImageLoad = (event: any) => {
-    const image = event.target;
-    const resolution = {
-      width: image.naturalWidth,
-      height: image.naturalHeight,
-    };
-    console.log(resolution);
-  }
-
   return (
     <div
       className={`${
@@ -191,10 +182,9 @@ const ProjectCards = (props: ProjectCardProps) => {
               <Image
                 src={hover ? `/assets/${project.title}-gif.gif` : `/assets/${project.title}-image.png`}
                 alt={`${project.title} Image`}
-                onLoad={handleImageLoad}
                 width={width}
                 height={height}
-                className="h-[30vh] lg:h-[40vh] w-full rounded-xl"
+                className="rounded-xl"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 priority
