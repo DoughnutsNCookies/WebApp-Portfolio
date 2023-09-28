@@ -6,6 +6,7 @@ import Projects from "./components/Projects";
 import LiveLocation from "./components/LiveLocation";
 import LetsTalk from "./components/LetsTalk";
 import Background from "./components/Background";
+import Head from "next/head";
 
 export default function Home() {
   const [eventIndex, setEventIndex] = useState<number>(0);
@@ -16,7 +17,10 @@ export default function Home() {
 
   return (
     <main>
-      <title>Sean Chuah</title>
+      <Head>
+        <title>Sean Chuah</title>
+        <meta name="description" content="Sean Chuah's Portfolio" />
+      </Head>
       <Background />
       <div
         className="translate-all h-full w-full font-playfair"

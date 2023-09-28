@@ -153,6 +153,22 @@ const ProjectCards = (props: ProjectCardProps) => {
   const [hover, setHover] = useState(false);
 
   const style = left ? { top: "100vh" } : { bottom: "100vh" };
+
+  let width = 1920, height = 1080;
+  useEffect(() => {
+    width = window.innerWidth;
+    height = window.innerHeight;
+  }, [isMobile])
+
+  const handleImageLoad = (event: any) => {
+    const image = event.target;
+    const resolution = {
+      width: image.naturalWidth,
+      height: image.naturalHeight,
+    };
+    console.log(resolution);
+  }
+
   return (
     <div
       className={`${
@@ -175,17 +191,19 @@ const ProjectCards = (props: ProjectCardProps) => {
               <Image
                 src={hover ? `/assets/${project.title}-gif.gif` : `/assets/${project.title}-image.png`}
                 alt={`${project.title} Image`}
-                width={1920}
-                height={1080}
-                className="h-[30vh] lg:h-[40vh] rounded-xl"
+                onLoad={handleImageLoad}
+                width={width}
+                height={height}
+                className="h-[30vh] lg:h-[40vh] w-full rounded-xl"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
+                priority
               />
               <p className="font-lato text-lg lg:text-xl text-secondaryBackgroundColor pt-4">
                 {project.description}
               </p>
             </div>
-            <button className="my-3 mx-[15vw] lg:mx-[10vw] p-2 scale-100 hover:scale-110 transition-all border-4 border-backgroundColor rounded-lg bg-backgroundColor">
+            <button className="my-3 mx-[15vw] lg:mx-[5vw] p-2 scale-100 hover:scale-110 transition-all border-4 border-backgroundColor rounded-lg bg-backgroundColor">
               <a
                 href={project.link}
                 target="_blank"
