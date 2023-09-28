@@ -47,7 +47,7 @@ const Map = (props: MapProps) => {
       />
       <Marker position={[latitude, longitude]}>
         <Popup>
-          {city}, {prov}
+          I&apos;m here!
         </Popup>
       </Marker>
     </MapContainer>
