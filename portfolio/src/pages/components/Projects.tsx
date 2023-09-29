@@ -101,6 +101,8 @@ const Projects = (props: ProjectsProps) => {
           break;
         }
       }
+      left.style.display = "flex";
+      right.style.display = "flex";
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -168,7 +170,7 @@ const ProjectCards = (props: ProjectCardProps) => {
         isMobile ? "w-full" : "w-1/2"
       } ${
         !left && isMobile ? "hidden" : ""
-      } fixed flex flex-col transition-all duration-300`}
+      } fixed hidden flex-col transition-all duration-300`}
       style={style}
       ref={reff}
     >
