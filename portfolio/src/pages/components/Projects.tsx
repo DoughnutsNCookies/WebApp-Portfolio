@@ -182,7 +182,7 @@ const ProjectCards = (props: ProjectCardProps) => {
                 {project.title}
               </h1>
               <Image
-                src={hover ? `/assets/${project.title}-gif.gif` : `/assets/${project.title}-image.png`}
+                src={hover ? `/assets/${project.title}-gif.gif` : `/assets/${project.title}-image.webp`}
                 alt={`${project.title} Image`}
                 width={width}
                 height={height}
