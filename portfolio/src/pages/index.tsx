@@ -23,18 +23,18 @@ export default function Home() {
         <meta name="description" content="Hi, I'm Sean! Welcome to my portfolio!" />
         <meta name="keywords" content="website portfolio sean schuah chuah tse yung shawn webpage personal" />
         <meta name="author" content="Sean Chuah Tse Yung" />
-        <meta name="theme-color" content="#242424"/>
-        
-        <meta property="og:title" content="Sean Chuah"/>
+        <meta name="theme-color" content="#242424" />
+
+        <meta property="og:title" content="Sean Chuah" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://schuah.me" />
-        <meta property="og:image" content="https://scaling-trout-wqw7jgv497p25rq7-3000.app.github.dev/assets/MetadataImage.png" />
+        <meta property="og:image" content="https://schuah.me/assets/MetadataImage.png" />
         <meta property="og:description" content="Hi, I'm Sean! Welcome to my portfolio!" />
 
         <meta property="twitter:title" content="Sean Chuah" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://schuah.me" />
-        <meta property="twitter:image" content="https://scaling-trout-wqw7jgv497p25rq7-3000.app.github.dev/assets/MetadataImage.png" />
+        <meta property="twitter:image" content="https://schuah.me/assets/MetadataImage.png" />
         <meta property="twitter:description" content="Hi, I'm Sean! Welcome to my portfolio!" />
       </Head>
       <Background />
