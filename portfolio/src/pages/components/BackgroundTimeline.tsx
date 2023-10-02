@@ -121,7 +121,6 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
     onSwiped: (eventData) => {
       setDeltaY(eventData.deltaY * -1);
     },
-    trackMouse: true,
   });
 
   useEffect(() => {
