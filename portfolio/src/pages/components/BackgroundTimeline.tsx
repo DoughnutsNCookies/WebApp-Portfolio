@@ -396,8 +396,9 @@ const SkipButton = (props: SkipButtonProps) => {
           <button
             className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
             onClick={() => {
+              if (eventIndex === events.length - 1) return;
               setEventIndex((prev: number) => {
-                return prev === events.length - 1 ? prev : prev + 1;
+                return prev === events.length - 1 ? events.length - 1 : prev + 1;
               })
               let timelineIndex = eventIndex + 1 === events.length - 1 ? events.length - 1 : events.length - eventIndex - 1;
               let offSetTop = eventIndex + 1 === events.length - 1 ? window.innerHeight / 3 : 0;
