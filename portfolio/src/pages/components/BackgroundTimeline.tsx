@@ -377,6 +377,10 @@ const SkipButton = (props: SkipButtonProps) => {
             setEventIndex((prev: number) => {
               return prev === 0 ? prev : prev - 1;
             })
+            if (eventIndex <= 1) {
+              window.scrollTo(0, window.innerHeight * 2);
+              return;
+            }
             let timelineIndex = eventIndex - 1 === 0 ? 1 : events.length - eventIndex - 1;
             window.scrollTo(0, (document.getElementById("timeline" + timelineIndex)?.offsetTop || 0) - window.innerHeight / 3);
           }}

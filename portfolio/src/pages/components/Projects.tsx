@@ -59,8 +59,10 @@ const Projects = (props: ProjectsProps) => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const { resetProject, showProject, setShowProject } = props;
   const [isMobile, setIsMobile] = useState(false);
+  const [projectIndex, setProjectIndex] = useState<number>(0);
 
   useEffect(() => {
     const handleScroll = (event: any) => {
@@ -69,18 +71,24 @@ const Projects = (props: ProjectsProps) => {
       const project = projectRef.current;
       const left = leftRef.current;
       const right = rightRef.current;
-      if (!project || !left || !right) return;
+      const button = buttonRef.current;
+      if (!project || !left || !right || !button) return;
 
       const { top, bottom } = project.getBoundingClientRect();
       
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
+        setProjectIndex(0);
         setShowProject(false);
+        button.style.display = "none";
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
         right.style.bottom = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
-        if (bottom < window.innerHeight * 2) setShowProject(false);
+        setProjectIndex((mobileMode ? projectsRight.length : 0) + projectsLeft.length);
+        setShowProject(false);
+        if (bottom < window.innerHeight * 0.7)
+          button.style.display = "none";
       }
 
       setTimeout(() => {
@@ -97,7 +105,9 @@ const Projects = (props: ProjectsProps) => {
         ) {
           left.style.top = `-${window.innerHeight * i}px`;
           right.style.bottom = `-${window.innerHeight * i}px`;
+          setProjectIndex(i);
           setShowProject(true);
+          button.style.display = "inline-flex";
           break;
         }
       }
@@ -110,6 +120,15 @@ const Projects = (props: ProjectsProps) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const left = leftRef.current;
+    const right = rightRef.current;
+    if (!left || !right) return;
+
+    left.style.top = `-${window.innerHeight * projectIndex}px`;
+    right.style.bottom = `-${window.innerHeight * projectIndex}px`;
+  }, [projectIndex])
 
   useEffect(() => {
     const project = projectRef.current;
@@ -125,13 +144,47 @@ const Projects = (props: ProjectsProps) => {
     const project = projectRef.current;
 
     if (!project) return;
-    project.style.opacity = showProject ? "1" : "0";
+    project.style.opacity = showProject ? "1" : "1";
   }, [showProject])
 
   return (
-    <section id="projects" ref={projectRef} className="transition-all">
+    <section
+      id="projects"
+      ref={projectRef}
+      className="h-screen transition-all"
+      style={{
+        height: ((isMobile ? projectsRight.length : 0) + projectsLeft.length + 1) * 100 + "vh",
+    }}
+    >
       <div
-        className="flex flex-row justify-between transition-all mt-[20vh]"
+        className={`${isMobile ? "" : "hidden" } z-20 sticky flex flex-row justify-center gap-4 top-[90vh] w-[100vw] h-[50px] transition-all duration-300`}
+        ref={buttonRef}
+      >
+        <button
+          className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
+          onClick={() => {
+            setProjectIndex((prev: number) => Math.max(0, prev - 1));
+            if (projectIndex === 0) return;
+            const target = (document.getElementById("projects")?.offsetTop || 0) + (document.getElementById("projecttrue" + (projectIndex - 1))?.offsetTop || 0);
+            window.scrollTo({ top: target });
+          }}
+        >
+          Previous
+        </button>
+        <button
+          className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
+          onClick={() => {
+            if (projectIndex === (isMobile ? projectsRight.length : 0) + projectsLeft.length - 1) return;
+            setProjectIndex((prev: number) => Math.min((isMobile ? projectsRight.length : 0) + projectsLeft.length, prev + 1));
+            const target = (document.getElementById("projects")?.offsetTop || 0) + (document.getElementById("projecttrue" + (projectIndex + 1))?.offsetTop || 0);
+            window.scrollTo({ top: target });
+          }}
+        >
+          Next
+        </button>
+      </div>
+      <div
+        className={"flex flex-row justify-between transition-all mt-[20vh]"}
         style={{
           height: ((isMobile ? projectsRight.length : 0) + projectsLeft.length + 1) * 100 + "vh",
         }}
@@ -175,8 +228,12 @@ const ProjectCards = (props: ProjectCardProps) => {
       ref={reff}
     >
       {projects.map((project: Project, index: number) => (
-        <div className="h-screen flex items-center" key={index}>
-          <div className="flex flex-col justify-between h-[85vh] lg:h-[80vh] w-[100vw] m-5 lg:m-10 border-4 rounded-xl bg-secondaryColor text-center px-2 lg:px-10">
+        <div
+          className={`${isMobile ? "pb-10" : ""} h-screen flex items-center`}
+          key={index}
+          id={"project" + left + index}
+        >
+          <div className="flex flex-col justify-between h-[80vh] w-[100vw] m-5 lg:m-10 border-4 rounded-xl bg-secondaryColor text-center px-2 lg:px-10">
             <div>
               <h1 className="text-5xl lg:text-6xl py-4 tracking-tight text-secondaryBackgroundColor">
                 {project.title}
