@@ -176,7 +176,7 @@ const ProjectCards = (props: ProjectCardProps) => {
     >
       {projects.map((project: Project, index: number) => (
         <div className="h-screen flex items-center" key={index}>
-          <div className="flex flex-col justify-between h-[85vh] lg:h-[80vh] w-[100vw] m-5 lg:m-10 border-4 rounded-xl bg-secondaryColor text-center px-5 lg:px-10">
+          <div className="flex flex-col justify-between h-[85vh] lg:h-[80vh] w-[100vw] m-5 lg:m-10 border-4 rounded-xl bg-secondaryColor text-center px-2 lg:px-10">
             <div>
               <h1 className="text-5xl lg:text-6xl py-4 tracking-tight text-secondaryBackgroundColor">
                 {project.title}
@@ -195,7 +195,7 @@ const ProjectCards = (props: ProjectCardProps) => {
                 {project.description}
               </p>
             </div>
-            <button className="my-3 mx-[15vw] lg:mx-[5vw] p-2 scale-100 hover:scale-110 transition-all border-4 border-backgroundColor rounded-lg bg-backgroundColor">
+            <button className="my-3 mx-[5vw] p-2 scale-100 hover:scale-110 transition-all border-4 border-backgroundColor rounded-lg bg-backgroundColor">
               <a
                 href={project.link}
                 target="_blank"

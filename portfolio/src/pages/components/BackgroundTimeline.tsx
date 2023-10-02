@@ -13,7 +13,7 @@ class TimelineEvent {
     return (
       100 -
       ((now - this.date.getTime()) /
-        (now - new Date("May 3, 2002").getTime())) *
+        (now - new Date(2002, 4, 15).getTime())) *
         100
     );
   }
@@ -25,72 +25,72 @@ class TimelineEvent {
 
 const events = [
   new TimelineEvent(
-    new Date("May 3, 2002"),
+    new Date(2002, 4, 15),
     "Hello World",
     "Hello! I was born on this date, raised in a super-loving family of five."
   ),
   new TimelineEvent(
-    new Date("January 2007"),
+    new Date(2007, 0),
     "My First Piano Lesson",
     "At 5 years old, I started playing the piano and I fell in love with it instantly."
   ),
   new TimelineEvent(
-    new Date("January 2009"),
+    new Date(2009, 0),
     "Primary School",
     "At 7 years old, I started primary school at SJK(C) Chung Hua. Life was just peaceful with the only worry being homework."
   ),
   new TimelineEvent(
-    new Date("January 2015"),
+    new Date(2015, 0),
     "Visi Tutor",
     "At 13 years old, I moved from primary school to Visi Tutor for my IGCSE studies."
   ),
   new TimelineEvent(
-    new Date("July 2015"),
+    new Date(2015, 6),
     "Church Pianist",
     "I volunteered as a pianist at my local church. Every week, we would gather to jam and practice, pushing ourselves to improve."
   ),
   new TimelineEvent(
-    new Date("January 2018"),
+    new Date(2018, 0),
     "College Life",
     "At 16 years old, I joined the Foundation In Arts programme at Sunway College, being the youngest in my class"
   ),
   new TimelineEvent(
-    new Date("March 2019"),
+    new Date(2019, 2),
     "University Life",
     "At 17 years old, I was interested in the music industry, so pursued an Audio Engineering degree at Sunway University."
   ),
   new TimelineEvent(
-    new Date("May 2021"),
+    new Date(2021, 4),
     "Grade 8 Piano",
     "At 19 years old, I completed my Grade 8 piano. Huge shoutout to my incredible piano teacher. She had my back since day one, the real MVP."
   ),
   new TimelineEvent(
-    new Date("August 2021"),
+    new Date(2021, 7),
     "Coding Adventure",
     "Wrote my first code in Python, taught myself the ropes using YouTube tutorials and reading documentation."
   ),
   new TimelineEvent(
-    new Date("December 2021"),
+    new Date(2021, 11),
     "Internship",
     "Sound designer intern at Vine Music Studio working on sounds for ads. I could feel my passion shifting toward coding, slowly but surely."
   ),
   new TimelineEvent(
-    new Date("May 2022"),
+    new Date(2022, 4),
     "42KL Piscine",
     "I took part in 42KL's intense one-month BootCamp called the Piscine. It was intense but I definitely learned a lot of things. Without a doubt, that month was the best time of my life."
   ),
   new TimelineEvent(
-    new Date("July 2022"),
+    new Date(2022, 6),
     "42KL Cadet",
     "I'd made it into the core programme! Marking the beginning of my journey being a cadet of 42KL. I met more awesome new friends, with more things to learn from each other."
   ),
   new TimelineEvent(
-    new Date("August 2022"),
+    new Date(2022, 7),
     "No Regrets",
     "My passion for sound design was at its lowest, so I ended my gig at Vine Music Studio. I knew it was time to shift gears and fully concentrate on 42KL and coding."
   ),
   new TimelineEvent(
-    new Date("June 2023"),
+    new Date(2023, 5),
     "Completed Cadetship",
     "At 21 years old, I become the first cadet in 42KL to complete the Core Programme in less than a year. Now, I'm diving into specialization within 42KL, ready to level up my coding skills even more."
   ),
@@ -131,7 +131,7 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  })
+  }, [])
 
   useEffect(() => {
     if (movingTriangleRef.current) return;
@@ -206,9 +206,9 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
         : index === events.length - 1
         ? "Present"
         : events[index].date.toLocaleDateString(undefined, {
-            year: "numeric",
-            month: "long",
-          })
+          year: "numeric",
+          month: "long",
+        })
     );
 
     line.style.transform = `translateX(${ratio * 100}%)`;
@@ -245,6 +245,7 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
           date={date}
           onEvent={events[eventIndex]}
           end={eventIndex === events.length - 1}
+          eventIndex={eventIndex}
           setEventIndex={setEventIndex}
         />
         <TimeLine lineRef={lineRef} onEvent={events[eventIndex]} />
@@ -258,16 +259,17 @@ interface DateIndicatorProps {
   date: string;
   onEvent: TimelineEvent | null;
   end: boolean;
+  eventIndex: number;
   setEventIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const DateIndicator = (props: DateIndicatorProps) => {
-  const { triangleRef, date, onEvent, end, setEventIndex } = props;
+  const { triangleRef, date, onEvent, end, eventIndex, setEventIndex } = props;
 
   return (
     <div
       ref={triangleRef}
-      className={`sticky top-[18vh] mb-[77vh] mt-[25vh] w-[100vw] ${end ? "h-[70px]" : "h-[50px]"}`}
+      className={`sticky top-[16vh] mb-[77vh] mt-[25vh] w-[100vw] ${end ? "h-[70px]" : "h-[50px]"}`}
       style={{
         transition: "transform 1s ease-in-out",
       }}
@@ -292,8 +294,8 @@ const DateIndicator = (props: DateIndicatorProps) => {
           {onEvent?.description}
         </p>
         <div className="top-[80vh] mb-[20vh] flex flex-row justify-between w-[100vw]">
-          <SkipButton setEventIndex={setEventIndex} beginning={true} />
-          <SkipButton setEventIndex={setEventIndex} beginning={false} />
+          <SkipButton eventIndex={eventIndex} setEventIndex={setEventIndex} beginning={true} />
+          <SkipButton eventIndex={eventIndex} setEventIndex={setEventIndex} beginning={false} />
         </div>
       </div>
     </div>
@@ -338,52 +340,99 @@ const TimeLine = (props: TimelineProps) => {
 };
 
 interface SkipButtonProps {
+  eventIndex: number;
   setEventIndex: React.Dispatch<React.SetStateAction<number>>;
   beginning: boolean;
 }
 
 const SkipButton = (props: SkipButtonProps) => {
-  const { setEventIndex, beginning } = props;
+  const { eventIndex, setEventIndex, beginning } = props;
 
   return (
-    <button
-      className="w-52 flex flex-col lg:mx-20 items-center py-1 mx-4 font-lato text-xl lg:text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl scale-100 hover:scale-110 transition-all"
-      onClick={() => {
-        setEventIndex(beginning ? 0 : events.length - 1);
-        window.scrollTo(
-          0,
-          beginning
-            ? window.innerHeight * 2
-            : (document.getElementById("timeline" + (events.length - 1))
-                ?.offsetTop || 0) -
-                window.innerHeight / 3
-        );
-      }}
+    <div
+      className="w-52 flex flex-col lg:mx-20 items-center py-1 mx-4 font-lato text-xl lg:text-2xl hover:underline bg-secondaryColor text-backgroundColor rounded-3xl transition-all"
     >
       {beginning ? (
-        <div className="flex flex-row items-center gap-4">
-          <svg
+        <div className="h-6 flex items-center w-full justify-center">
+        <button
+          className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+          onClick={() => {
+            setEventIndex(0)
+            window.scrollTo(0, window.innerHeight * 2);
+          }}
+        >
+        <svg
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
-            viewBox="0 0 448 512"
+            viewBox="0 0 512 512"
+            className="fill-backgroundColor"
           >
-            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+            <path d="M493.6 445c-11.2 5.3-24.5 3.6-34.1-4.4L288 297.7V416c0 12.4-7.2 23.7-18.4 29s-24.5 3.6-34.1-4.4L64 297.7V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V96C0 78.3 14.3 64 32 64s32 14.3 32 32V214.3L235.5 71.4c9.5-7.9 22.8-9.7 34.1-4.4S288 83.6 288 96V214.3L459.5 71.4c9.5-7.9 22.8-9.7 34.1-4.4S512 83.6 512 96V416c0 12.4-7.2 23.7-18.4 29z"/>
           </svg>
-          <p className="font-lato font-extrabold cursor-pointer">Beginning</p>
-        </div>
+        </button>
+        <div className="h-full w-[2px] bg-backgroundColor"></div>
+        <button
+          className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+          onClick={() => {
+            setEventIndex((prev: number) => {
+              return prev === 0 ? prev : prev - 1;
+            })
+            let timelineIndex = eventIndex - 1 === 0 ? 1 : events.length - eventIndex - 1;
+            window.scrollTo(0, (document.getElementById("timeline" + timelineIndex)?.offsetTop || 0) - window.innerHeight / 3);
+          }}
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="1em"
+          viewBox="0 0 512 512"
+          className="fill-backgroundColor"
+        >
+          <path d="M267.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160L64 241V96c0-17.7-14.3-32-32-32S0 78.3 0 96V416c0 17.7 14.3 32 32 32s32-14.3 32-32V271l11.5 9.6 192 160z"/>
+        </svg>
+        </button>
+      </div>
       ) : (
-        <div className="flex flex-row items-center gap-4">
-          <p className="font-lato font-extrabold cursor-pointer">Present</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="1em"
-            viewBox="0 0 448 512"
+        <div className="h-6 flex items-center w-full justify-center">
+          <button
+            className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+            onClick={() => {
+              setEventIndex((prev: number) => {
+                return prev === events.length - 1 ? prev : prev + 1;
+              })
+              let timelineIndex = eventIndex + 1 === events.length - 1 ? events.length - 1 : events.length - eventIndex - 1;
+              let offSetTop = eventIndex + 1 === events.length - 1 ? window.innerHeight / 3 : 0;
+              window.scrollTo(0, (document.getElementById("timeline" + timelineIndex)?.offsetTop || 0) - offSetTop);
+            }}
           >
-            <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-          </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 320 512"
+              className="fill-backgroundColor"
+            >
+              <path d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z"/>
+            </svg>
+          </button>
+          <div className="h-full w-[2px] bg-backgroundColor"></div>
+          <button
+            className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+            onClick={() => {
+              setEventIndex(events.length - 1)
+              window.scrollTo(0, (document.getElementById("timeline" + (events.length - 1))?.offsetTop || 0) - window.innerHeight / 3);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 512 512"
+              className="fill-backgroundColor"
+            >
+              <path d="M18.4 445c11.2 5.3 24.5 3.6 34.1-4.4L224 297.7V416c0 12.4 7.2 23.7 18.4 29s24.5 3.6 34.1-4.4L448 297.7V416c0 17.7 14.3 32 32 32s32-14.3 32-32V96c0-17.7-14.3-32-32-32s-32 14.3-32 32V214.3L276.5 71.4c-9.5-7.9-22.8-9.7-34.1-4.4S224 83.6 224 96V214.3L52.5 71.4c-9.5-7.9-22.8-9.7-34.1-4.4S0 83.6 0 96V416c0 12.4 7.2 23.7 18.4 29z"/>
+            </svg>
+          </button>
         </div>
       )}
-    </button>
+    </div>
   );
 };
 

@@ -39,7 +39,7 @@ const NavBar = (props: NavBarProps) => {
       }`}
       style={navbarStyle}
     >
-      <ul className="flex flex-row py-2 justify-center items-center gap-x-4 lg:gap-x-20 font-playfair text-xs lg:text-2xl">
+      <ul className="flex flex-row py-2 justify-center items-center gap-x-3 md:gap-x-10 lg:gap-x-20 font-playfair text-xs md:text-lg lg:text-2xl">
         <li>
           <button
             className=" hover:text-accentColor transition-all scale-100 hover:scale-105"
