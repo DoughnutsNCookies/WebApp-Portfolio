@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 class TimelineEvent {
   constructor(date: Date, title: string, description: string) {
@@ -114,57 +115,55 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
   const movingTriangleRef = useRef<boolean>(false);
   const [date, setDate] = useState<string>("");
   const { displayEvent, setDisplayEvent, eventIndex, setEventIndex } = props;
+  const [deltaY, setDeltaY] = useState<number>(0);
+
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      setDeltaY(eventData.deltaY * -1);
+    },
+    trackMouse: true,
+  });
 
   useEffect(() => {
-    let lastKnownScrollPosition = 0;
-    let deltaY = 0;
-
     const handleScroll = (event: any) => {
-      if (movingTriangleRef.current) return;
-
-      const background = backgroundRef.current;
-      const line = lineRef.current;
-      const triangle = triangleRef.current;
-
-      if (!background || !line || !triangle) return;
-
-      const { top, bottom } = background.getBoundingClientRect();
-
-      setDisplayEvent(true);
-      if (top > 0) {
-        setEventIndex(0);
-        return;
-      } else if (bottom < window.innerHeight) {
-        setEventIndex(events.length - 1);
-        return;
-      }
-
-      let ticking = false;
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          deltaY = window.scrollY - lastKnownScrollPosition;
-          lastKnownScrollPosition = window.scrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-
-      setEventIndex((prev: number) => {
-        return deltaY < 0
-          ? prev === 0
-            ? prev
-            : prev - 1
-          : prev === events.length - 1
-          ? prev
-          : prev + 1;
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll);
+      setDeltaY(event.deltaY);
+    }
+    window.addEventListener("wheel", handleScroll);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("wheel", handleScroll);
     };
-  }, []);
+  })
+
+  useEffect(() => {
+    if (movingTriangleRef.current) return;
+
+    const background = backgroundRef.current;
+    const line = lineRef.current;
+    const triangle = triangleRef.current;
+
+    if (!background || !line || !triangle) return;
+
+    const { top, bottom } = background.getBoundingClientRect();
+
+    setDisplayEvent(true);
+    if (top > 0) {
+      setEventIndex(0);
+      return;
+    } else if (bottom < window.innerHeight) {
+      setEventIndex(events.length - 1);
+      return;
+    }
+
+    setEventIndex((prev: number) => {
+      return deltaY < 0
+        ? prev === 0
+          ? prev
+          : prev - 1
+        : prev === events.length - 1
+        ? prev
+        : prev + 1;
+    });
+  }, [deltaY]);
 
   useEffect(() => {
     movingTriangleRef.current = true;
@@ -236,6 +235,7 @@ const BackgroundTimeline = (props: BackgroundTimelineProps) => {
         />
       ))}
       <div
+        {...handlers}
         className="text-center flex flex-col"
         style={{
           height: events.length + "00vh",
