@@ -356,6 +356,7 @@ const SkipButton = (props: SkipButtonProps) => {
         <div className="h-6 flex items-center w-full justify-center">
         <button
           className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+          aria-label="Next"
           onClick={() => {
             setEventIndex(0)
             window.scrollTo(0, window.innerHeight * 2);
@@ -373,6 +374,7 @@ const SkipButton = (props: SkipButtonProps) => {
         <div className="h-full w-[2px] bg-backgroundColor"></div>
         <button
           className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+          aria-label="Skip All"
           onClick={() => {
             setEventIndex((prev: number) => {
               return prev === 0 ? prev : prev - 1;
@@ -399,6 +401,7 @@ const SkipButton = (props: SkipButtonProps) => {
         <div className="h-6 flex items-center w-full justify-center">
           <button
             className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+            aria-label="Previous"
             onClick={() => {
               if (eventIndex === events.length - 1) return;
               setEventIndex((prev: number) => {
@@ -421,6 +424,7 @@ const SkipButton = (props: SkipButtonProps) => {
           <div className="h-full w-[2px] bg-backgroundColor"/>
           <button
             className="w-[50%] flex flex-row justify-center transition-all scale-100 hover:scale-125"
+            aria-label="Back to Beginning"
             onClick={() => {
               setEventIndex(events.length - 1)
               window.scrollTo(0, (document.getElementById("timeline" + (events.length - 1))?.offsetTop || 0) - window.innerHeight / 3);

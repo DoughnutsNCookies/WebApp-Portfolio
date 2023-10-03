@@ -107,7 +107,8 @@ const Projects = (props: ProjectsProps) => {
           right.style.bottom = `-${window.innerHeight * i}px`;
           setProjectIndex(i);
           setShowProject(true);
-          button.style.display = "inline-flex";
+          if (isMobile)
+            button.style.display = "inline-flex";
           break;
         }
       }
@@ -162,6 +163,7 @@ const Projects = (props: ProjectsProps) => {
       >
         <button
           className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
+          aria-label="Previous Project"
           onClick={() => {
             setProjectIndex((prev: number) => Math.max(0, prev - 1));
             if (projectIndex === 0) return;
@@ -173,6 +175,7 @@ const Projects = (props: ProjectsProps) => {
         </button>
         <button
           className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
+          aria-label="Next Project"
           onClick={() => {
             if (projectIndex === (isMobile ? projectsRight.length : 0) + projectsLeft.length - 1) return;
             setProjectIndex((prev: number) => Math.min((isMobile ? projectsRight.length : 0) + projectsLeft.length, prev + 1));
