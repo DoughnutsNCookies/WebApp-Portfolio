@@ -3,9 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 interface MapProps {
-  city: string;
   setCity: (city: string) => void;
-  prov: string;
   setProv: (prov: string) => void;
 }
 
@@ -13,7 +11,7 @@ const Map = (props: MapProps) => {
   const randomLocationSet = useRef(false);
   const [latitude, setLatitude] = useState<number>(0);
   const [longitude, setLongitude] = useState<number>(0);
-  const { city, setCity, prov, setProv } = props;
+  const { setCity, setProv } = props;
 
   useEffect(() => {
     const fetchData = async () => {

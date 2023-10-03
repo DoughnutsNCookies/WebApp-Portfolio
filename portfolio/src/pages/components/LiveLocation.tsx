@@ -18,7 +18,7 @@ const LiveLocation = () => {
       <div className="flex flex-col lg:flex-row items-center gap-7 lg:gap-24 pt-6 lg:pt-10">
         <div className="flex flex-col items-center">
           <div className="w-[100vw] lg:w-[50vw] h-[30vh] lg:h-[60vh] lg:pt-10 pl-5 lg:pl-10 pr-5 lg:pr-10 pb-5 z-0">
-            <Map city={city} setCity={setCity} prov={prov} setProv={setProv} />
+            <Map setCity={setCity} setProv={setProv} />
           </div>
           <div className="pl-10 pr-10">
             <h1
