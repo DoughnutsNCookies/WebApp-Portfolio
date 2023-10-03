@@ -61,12 +61,12 @@ const Projects = (props: ProjectsProps) => {
   const rightRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
   const { resetProject, showProject, setShowProject } = props;
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const [projectIndex, setProjectIndex] = useState<number>(0);
 
   useEffect(() => {
     const handleScroll = (event: any) => {
-      const mobileMode = window.innerWidth < window.innerHeight
+      const mobileMode = window.innerWidth < window.innerHeight;
       setIsMobile(mobileMode);
       const project = projectRef.current;
       const left = leftRef.current;
@@ -82,6 +82,7 @@ const Projects = (props: ProjectsProps) => {
         setProjectIndex(0);
         setShowProject(false);
         button.style.display = "none";
+        return;
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
         right.style.bottom = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
@@ -89,7 +90,11 @@ const Projects = (props: ProjectsProps) => {
         setShowProject(false);
         if (bottom < window.innerHeight * 0.7)
           button.style.display = "none";
+        return;
       }
+
+      if (mobileMode)
+        button.style.display = "inline-flex";
 
       setTimeout(() => {
         left.style.transform = `translateY(0%)`;
@@ -107,8 +112,7 @@ const Projects = (props: ProjectsProps) => {
           right.style.bottom = `-${window.innerHeight * i}px`;
           setProjectIndex(i);
           setShowProject(true);
-          if (isMobile)
-            button.style.display = "inline-flex";
+
           break;
         }
       }
