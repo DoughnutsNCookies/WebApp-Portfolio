@@ -11,7 +11,6 @@ import Head from "next/head";
 export default function Home() {
   const [eventIndex, setEventIndex] = useState<number>(0);
   const [displayEvent, setDisplayEvent] = useState<boolean>(false);
-  const [showProject, setShowProject] = useState<boolean>(false);
   const [resetProject, setResetProject] = useState<boolean>(true);
   const [showContact, setShowContact] = useState<boolean>(false);
 
@@ -42,11 +41,11 @@ export default function Home() {
         className="translate-all h-full w-full font-playfair"
         style={{ scrollBehavior: "smooth" }}
       >
-        <NavBar setShowContact={setShowContact} resetProject={resetProject} setResetProject={setResetProject} setShowProject={setShowProject} setDisplayEvent={setDisplayEvent} setEventIndex={setEventIndex} />
+        <NavBar setShowContact={setShowContact} resetProject={resetProject} setResetProject={setResetProject} setDisplayEvent={setDisplayEvent} setEventIndex={setEventIndex} />
         <HomePage />
         <BackgroundTimeline displayEvent={displayEvent} setDisplayEvent={setDisplayEvent} eventIndex={eventIndex} setEventIndex={setEventIndex} />
         <div className="h-[40vh] lg:h-[50vh]"></div>
-        <Projects resetProject={resetProject} showProject={showProject} setShowProject={setShowProject} />
+        <Projects resetProject={resetProject} />
         <div className="h-[20vh]"></div>
         <LiveLocation />
         <LetsTalk showContact={showContact} setShowContact={setShowContact} />

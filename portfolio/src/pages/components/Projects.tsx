@@ -51,15 +51,13 @@ const projectsRight = [
 
 interface ProjectsProps {
   resetProject: boolean;
-  showProject: boolean;
-  setShowProject: (showProject: boolean) => void;
 }
 
 const Projects = (props: ProjectsProps) => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-  const { resetProject, showProject, setShowProject } = props;
+  const { resetProject } = props;
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [projectIndex, setProjectIndex] = useState<number>(0);
 
@@ -75,22 +73,25 @@ const Projects = (props: ProjectsProps) => {
 
       if (mobileMode) {
         left.style.top = `100vh`;
-        left.style.display = "inline-flex"
+        left.style.display = "flex"
         return;
       }
-
+      
       const { top, bottom } = project.getBoundingClientRect();
+      if (top > window.innerHeight * 2) {
+        left.style.display = "flex";
+        right.style.display = "flex";
+      }
+
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
         setProjectIndex(0);
-        setShowProject(false);
         return;
       } else if (bottom < window.innerHeight) {
         left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
         right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;
         setProjectIndex(projectsLeft.length);
-        setShowProject(false);
         return;
       }
 
@@ -109,12 +110,9 @@ const Projects = (props: ProjectsProps) => {
           left.style.top = `-${window.innerHeight * i}px`;
           right.style.bottom = `-${window.innerHeight * i}px`;
           setProjectIndex(i);
-          setShowProject(true);
           break;
         }
       }
-      left.style.display = "flex";
-      right.style.display = "flex";
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -140,8 +138,6 @@ const Projects = (props: ProjectsProps) => {
     
     left.style.top = `0px`;
     right.style.bottom = `0px`;
-    left.style.display = "none";
-    right.style.display = "none";
   }, [resetProject])
 
   return (

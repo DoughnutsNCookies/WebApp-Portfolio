@@ -4,7 +4,6 @@ interface NavBarProps {
   setShowContact: (showContact: boolean) => void;
   resetProject: boolean;
   setResetProject: (resetProject: boolean) => void;
-  setShowProject: (showProject: boolean) => void;
   setDisplayEvent: (displayEvent: boolean) => void;
   setEventIndex: (eventIndex: number) => void;
 }
@@ -13,7 +12,7 @@ const NavBar = (props: NavBarProps) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [firstLoad, setFirstLoad] = useState(true);
   const [NavVisible, setNavVisible] = useState(true);
-  const { setShowContact, setShowProject, resetProject, setResetProject, setDisplayEvent, setEventIndex } = props;
+  const { setShowContact, resetProject, setResetProject, setDisplayEvent, setEventIndex } = props;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +46,6 @@ const NavBar = (props: NavBarProps) => {
               setNavVisible(true);
               setEventIndex(0);
               setDisplayEvent(false);
-              setShowProject(false);
               document
                 .getElementById("home")
                 ?.scrollIntoView({ behavior: "smooth" });
@@ -65,7 +63,6 @@ const NavBar = (props: NavBarProps) => {
             onClick={(e) => {
               setEventIndex(0);
               setDisplayEvent(true);
-              setShowProject(false);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
@@ -87,7 +84,6 @@ const NavBar = (props: NavBarProps) => {
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
-              setShowProject(true);
               setResetProject(!resetProject);
               setTimeout(() => {
                 setNavVisible(false);
@@ -114,7 +110,6 @@ const NavBar = (props: NavBarProps) => {
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
-              setShowProject(false);
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
@@ -135,7 +130,6 @@ const NavBar = (props: NavBarProps) => {
             onClick={(e) => {
               setEventIndex(14);
               setDisplayEvent(false);
-              setShowProject(false);
               setShowContact(true);
               setTimeout(() => {
                 setNavVisible(false);
