@@ -59,7 +59,6 @@ const Projects = (props: ProjectsProps) => {
   const projectRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
   const { resetProject, showProject, setShowProject } = props;
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [projectIndex, setProjectIndex] = useState<number>(0);
@@ -68,33 +67,32 @@ const Projects = (props: ProjectsProps) => {
     const handleScroll = (event: any) => {
       const mobileMode = window.innerWidth < window.innerHeight;
       setIsMobile(mobileMode);
+
       const project = projectRef.current;
       const left = leftRef.current;
       const right = rightRef.current;
-      const button = buttonRef.current;
-      if (!project || !left || !right || !button) return;
+      if (!project || !left || !right) return;
+
+      if (mobileMode) {
+        left.style.top = `100vh`;
+        left.style.display = "inline-flex"
+        return;
+      }
 
       const { top, bottom } = project.getBoundingClientRect();
-      
       if (top > 0) {
         left.style.top = `100vh`;
         right.style.bottom = `100vh`;
         setProjectIndex(0);
         setShowProject(false);
-        button.style.display = "none";
         return;
       } else if (bottom < window.innerHeight) {
-        left.style.top = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
-        right.style.bottom = `-${window.innerHeight * ((mobileMode ? projectsRight.length : 0) + projectsLeft.length)}px`;
-        setProjectIndex((mobileMode ? projectsRight.length : 0) + projectsLeft.length);
+        left.style.top = `-${window.innerHeight * projectsLeft.length}px`;
+        right.style.bottom = `-${window.innerHeight * projectsLeft.length}px`;
+        setProjectIndex(projectsLeft.length);
         setShowProject(false);
-        if (bottom < window.innerHeight * 0.7)
-          button.style.display = "none";
         return;
       }
-
-      if (mobileMode)
-        button.style.display = "inline-flex";
 
       setTimeout(() => {
         left.style.transform = `translateY(0%)`;
@@ -103,7 +101,7 @@ const Projects = (props: ProjectsProps) => {
       right.style.transform = `translateY(${event.deltaY > 0 ? 10 : -10}px)`;
       left.style.transform = `translateY(${event.deltaY > 0 ? -10 : 10}px)`;
 
-      for (let i = 0; i < (mobileMode ? projectsRight.length : 0) + projectsLeft.length; i++) {
+      for (let i = 0; i < projectsLeft.length; i++) {
         if (
           -top > window.innerHeight * i &&
           -top < window.innerHeight * (i + 1)
@@ -112,7 +110,6 @@ const Projects = (props: ProjectsProps) => {
           right.style.bottom = `-${window.innerHeight * i}px`;
           setProjectIndex(i);
           setShowProject(true);
-
           break;
         }
       }
@@ -143,14 +140,9 @@ const Projects = (props: ProjectsProps) => {
     
     left.style.top = `0px`;
     right.style.bottom = `0px`;
+    left.style.display = "none";
+    right.style.display = "none";
   }, [resetProject])
-
-  useEffect(() => {
-    const project = projectRef.current;
-
-    if (!project) return;
-    project.style.opacity = showProject ? "1" : "1";
-  }, [showProject])
 
   return (
     <section
@@ -158,42 +150,13 @@ const Projects = (props: ProjectsProps) => {
       ref={projectRef}
       className="h-screen transition-all"
       style={{
-        height: ((isMobile ? projectsRight.length : 0) + projectsLeft.length + 1) * 100 + "vh",
+        height: ((isMobile ? projectsRight.length : 1) + projectsLeft.length) * 100 + "vh",
     }}
     >
       <div
-        className={`${isMobile ? "" : "hidden" } z-20 sticky flex flex-row justify-center gap-4 top-[90vh] w-[100vw] h-[50px] transition-all duration-300`}
-        ref={buttonRef}
-      >
-        <button
-          className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
-          aria-label="Previous Project"
-          onClick={() => {
-            setProjectIndex((prev: number) => Math.max(0, prev - 1));
-            if (projectIndex === 0) return;
-            const target = (document.getElementById("projects")?.offsetTop || 0) + (document.getElementById("projecttrue" + (projectIndex - 1))?.offsetTop || 0);
-            window.scrollTo({ top: target });
-          }}
-        >
-          Previous
-        </button>
-        <button
-          className="w-[40vw] text-2xl font-bold text-backgroundColor border-2 border-backgroundColor rounded-md bg-secondaryColor"
-          aria-label="Next Project"
-          onClick={() => {
-            if (projectIndex === (isMobile ? projectsRight.length : 0) + projectsLeft.length - 1) return;
-            setProjectIndex((prev: number) => Math.min((isMobile ? projectsRight.length : 0) + projectsLeft.length, prev + 1));
-            const target = (document.getElementById("projects")?.offsetTop || 0) + (document.getElementById("projecttrue" + (projectIndex + 1))?.offsetTop || 0);
-            window.scrollTo({ top: target });
-          }}
-        >
-          Next
-        </button>
-      </div>
-      <div
         className={"flex flex-row justify-between transition-all mt-[20vh]"}
         style={{
-          height: ((isMobile ? projectsRight.length : 0) + projectsLeft.length + 1) * 100 + "vh",
+          height: ((isMobile ? projectsRight.length : 1) + projectsLeft.length) * 100 + "vh",
         }}
       >
         <ProjectCards projects={isMobile ? [...projectsLeft, ...projectsRight] : projectsRight} reff={rightRef} left={false} isMobile={isMobile}/>
@@ -227,10 +190,11 @@ const ProjectCards = (props: ProjectCardProps) => {
       className={`${
         left ? "left-0" : "right-0"
       } ${
-        isMobile ? "w-full" : "w-1/2"
-      } ${
-        !left && isMobile ? "hidden" : ""
-      } fixed hidden flex-col transition-all duration-300`}
+        isMobile
+          ? (!left ? "hidden" : "w-full")
+          : "w-1/2 fixed"
+      }
+      hidden flex-col transition-all duration-300`}
       style={style}
       ref={reff}
     >

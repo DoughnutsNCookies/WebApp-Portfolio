@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import BackgroundTimeline from "./components/BackgroundTimeline";
@@ -45,9 +45,9 @@ export default function Home() {
         <NavBar setShowContact={setShowContact} resetProject={resetProject} setResetProject={setResetProject} setShowProject={setShowProject} setDisplayEvent={setDisplayEvent} setEventIndex={setEventIndex} />
         <HomePage />
         <BackgroundTimeline displayEvent={displayEvent} setDisplayEvent={setDisplayEvent} eventIndex={eventIndex} setEventIndex={setEventIndex} />
-        <div className="h-[100vh] lg:h-[50vh]"></div>
+        <div className="h-[40vh] lg:h-[50vh]"></div>
         <Projects resetProject={resetProject} showProject={showProject} setShowProject={setShowProject} />
-        <div className="h-[50vh]"></div>
+        <div className="h-[20vh]"></div>
         <LiveLocation />
         <LetsTalk showContact={showContact} setShowContact={setShowContact} />
       </div>
