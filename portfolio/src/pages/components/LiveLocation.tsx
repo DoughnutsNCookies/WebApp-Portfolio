@@ -8,7 +8,7 @@ const LiveLocation = () => {
   return (
     <section id="live-location" className="flex flex-col items-center h-screen">
       <h1
-        className="text-2xl lg:text-6xl tracking-tighter pt-8 lg:pt-20"
+        className="text-2xl lg:text-6xl tracking-tighter pt-10 lg:pt-20"
         style={{
           textShadow: "10px 10px 25px #5ACEBA7D",
         }}

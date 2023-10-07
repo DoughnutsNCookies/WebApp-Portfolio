@@ -60,7 +60,7 @@ const LetsTalk = (props: LetsTalkProps) => {
         >
           Let&apos;s Talk!
         </h1>
-        <div className="flex flex-col lg:flex-row items-center justify-center pt-4 lg:pt-32">
+        <div className="flex flex-col lg:flex-row items-center justify-center pt-10 lg:pt-32">
           <div
             className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300"
             ref={contactRef}
@@ -75,7 +75,7 @@ const LetsTalk = (props: LetsTalkProps) => {
                 Contact Me
               </h1>
               <p
-                className="font-lato text-md font-light text-center px-4"
+                className="font-lato text-md font-light text-center px-20 lg:px-4"
                 style={{
                   textShadow: "2px 2px 10px #5ACEBA7D",
                 }}
