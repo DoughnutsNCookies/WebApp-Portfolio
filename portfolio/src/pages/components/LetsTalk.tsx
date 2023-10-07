@@ -20,6 +20,8 @@ const LetsTalk = (props: LetsTalkProps) => {
       const line = lineRef.current;
       if (!letsTalk || !contact || !social || !line) return;
 
+      if (window.innerHeight > window.innerWidth) return;
+
       const { top, bottom } = letsTalk.getBoundingClientRect();
       if (top > window.innerHeight) return;
       const transform =
