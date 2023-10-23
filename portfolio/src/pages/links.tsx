@@ -1,7 +1,7 @@
 import Background from "./components/Background";
 import Image from "next/image";
 
-const LetsTalk = () => {
+const Links = () => {
   return (
     <section id="lets-talk" className=" font-playfair overflow-x-clip">
       <Background />
@@ -180,4 +180,4 @@ const Details = (props: DetailsProps) => {
   );
 };
 
-export default LetsTalk;
+export default Links;
