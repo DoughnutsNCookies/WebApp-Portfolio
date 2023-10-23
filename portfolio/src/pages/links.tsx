@@ -1,10 +1,10 @@
 import Background from "./components/Background";
 import Image from "next/image";
+import Head from "next/head";
 
-const Links = () => {
+const Content = () => {
   return (
     <section id="lets-talk" className=" font-playfair overflow-x-clip">
-      <Background />
       <div className="flex flex-col items-center">
         <Image
           src="/assets/ProfilePicture.webp"
@@ -19,7 +19,7 @@ const Links = () => {
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
-          >
+        >
           Hi! I&apos;m Sean Chuah
         </h1>
         <p
@@ -30,7 +30,7 @@ const Links = () => {
         >
           An ex-audio engineer now diving into IT and software hustle. My dream? Making kick-ass games that everyone can enjoy.
         </p>
-        <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300"/>
+        <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300" />
         <div className="flex flex-col lg:flex-row items-center justify-center pt-6 lg:pt-32">
           <div className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300">
             <div>
@@ -72,7 +72,7 @@ const Links = () => {
               />
             </div>
           </div>
-          <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300"/>
+          <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300" />
           <div className="flex flex-col pt-5 lg:pt-0 lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300">
             <div>
               <h1
@@ -179,5 +179,34 @@ const Details = (props: DetailsProps) => {
     </a>
   );
 };
+
+const Links = () => {
+  return (
+    <main>
+      <Head>
+        <title>Sean Chuah Links</title>
+        <meta name="title" content="Sean Chuah" />
+        <meta name="description" content="Hi, I'm Sean! Welcome to my portfolio!" />
+        <meta name="keywords" content="website portfolio sean schuah chuah tse yung shawn webpage personal" />
+        <meta name="author" content="Sean Chuah Tse Yung" />
+        <meta name="theme-color" content="#242424" />
+
+        <meta property="og:title" content="Sean Chuah" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://schuah.me" />
+        <meta property="og:image" content="https://schuah.me/assets/MetadataImage.png" />
+        <meta property="og:description" content="Hi, I'm Sean! Welcome to my portfolio!" />
+
+        <meta property="twitter:title" content="Sean Chuah" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://schuah.me" />
+        <meta property="twitter:image" content="https://schuah.me/assets/MetadataImage.png" />
+        <meta property="twitter:description" content="Hi, I'm Sean! Welcome to my portfolio!" />
+      </Head>
+      <Background />
+      <Content />
+    </main>
+  )
+}
 
 export default Links;

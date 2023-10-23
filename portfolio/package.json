@@ -31,5 +31,10 @@
     "@types/lodash": "^4.14.195",
     "i": "^0.3.7",
     "npm": "^9.7.2"
-  }
+  },
+  "browserslist": [
+   ">0.2%",
+  "not dead",
+  "not op_mini all"
+  ]
 }
