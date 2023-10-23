@@ -10,10 +10,12 @@ const HomePage = () => {
           I&apos;m Sean Chuah
         </h1>
         <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-        <div className="text-center animate-fade-in text-xl lg:text-3xl font-lato font-light tracking-wide" style={{
-                textShadow: "2px 2px 10px #5ACEBA7D",
-              }}>
-          <p className="max-w-[53rem] px-6 lg:px-0">An ex-audio engineer now diving into IT and Software hustle. My dream? Making kick-ass games that everyone can enjoy.</p>
+        <div
+          className="text-center animate-fade-in text-xl lg:text-3xl font-lato font-light tracking-wide"
+          style={{
+            textShadow: "2px 2px 10px #5ACEBA7D",
+            }}>
+          <p className="max-w-[53rem] px-6 lg:px-0">An ex-audio engineer now diving into IT and software hustle. My dream? Making kick-ass games that everyone can enjoy.</p>
         </div>
       </div>
     </section>
