@@ -20,7 +20,7 @@ const LetsTalk = () => {
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
           >
-          Hi! I'm Sean Chuah
+          Hi! I&apos;m Sean Chuah
         </h1>
         <p
           className="px-4 py-6 text-center"
