@@ -63,13 +63,15 @@ const NavBar = (props: NavBarProps) => {
             onClick={(e) => {
               setEventIndex(0);
               setDisplayEvent(true);
+              document
+                .getElementById("background")
+                ?.scrollIntoView({ behavior: "smooth" });
               setTimeout(() => {
                 setNavVisible(false);
               }, 1000);
-              window.scrollTo(
-                0,
-                window.innerHeight * 2
-              );
+              setTimeout(() => {
+                window.scrollTo(0, window.innerHeight * 2);
+              }, 300);
             }}
             style={{
               textShadow: "2px 2px 15px #5ACEBA7D",
