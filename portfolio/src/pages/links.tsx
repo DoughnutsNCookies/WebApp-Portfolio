@@ -15,7 +15,7 @@ const Content = () => {
           className="rounded-full w-[80vw] h-[80vw] mt-6 object-cover"
         />
         <h1
-          className="text-5xl lg:text-6xl tracking-tighter pt-4 lg:pt-20"
+          className="text-5xl text-center lg:text-6xl tracking-tighter pt-4 lg:pt-20"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
