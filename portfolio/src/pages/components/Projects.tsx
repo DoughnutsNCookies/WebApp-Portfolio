@@ -44,7 +44,7 @@ const projectsRight = [
   ),
   new Project(
     "WebServ",
-    "WebServ is an HTTP server project written in C++ 98, drawing inspiration from Nginx configuration and behaviors. It handles common methods such as GET, POST, PUT, DELETE, and HEAD methods, cookie and session management, as well as supporting multiple Common Gateway Interface (CGI) scripts.",
+    "WebServ is an HTTP server project written in C++ 98, inspired by Nginx configuration and behaviors. It handles common methods such as GET, POST, PUT, DELETE, and HEAD methods, cookie and session management, and multiple Common Gateway Interface (CGI) scripts.",
     "https://github.com/DoughnutsNCookies/42KL-CP-Webserv"
   ),
 ];
@@ -215,7 +215,7 @@ const ProjectCards = (props: ProjectCardProps) => {
                 onMouseLeave={() => setHover(false)}
                 priority
               />
-              <p className="font-lato text-lg lg:text-xl text-secondaryBackgroundColor pt-4">
+              <p className="font-lato text-lg text-secondaryBackgroundColor pt-4">
                 {project.description}
               </p>
             </div>
