@@ -4,7 +4,7 @@ import Head from "next/head";
 
 const Content = () => {
   return (
-    <section id="lets-talk" className=" font-playfair overflow-x-clip">
+    <section id="lets-talk" className="font-playfair overflow-x-clip lg:h-screen">
       <div className="flex flex-col items-center">
         <Image
           src="/assets/ProfilePicture.webp"
@@ -12,10 +12,10 @@ const Content = () => {
           width={400}
           height={400}
           priority
-          className="rounded-full w-[80vw] h-[80vw] mt-6 object-cover"
+          className="rounded-full w-[80vw] lg:w-[20vw] mt-6 object-cover"
         />
         <h1
-          className="text-5xl text-center lg:text-6xl tracking-tighter pt-4 lg:pt-20"
+          className="text-5xl text-center lg:text-6xl tracking-tighter pt-4"
           style={{
             textShadow: "10px 10px 25px #5ACEBA7D",
           }}
@@ -23,16 +23,16 @@ const Content = () => {
           Hi! I&apos;m Sean Chuah
         </h1>
         <p
-          className="px-4 py-6 text-center"
+          className="px-4 py-6 lg:text-xl max-w-6xl text-center"
           style={{
             textShadow: "2px 2px 10px #5ACEBA7D",
           }}
         >
           An ex-audio engineer now diving into IT and software hustle. My dream? Making kick-ass games that everyone can enjoy.
         </p>
-        <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300" />
-        <div className="flex flex-col lg:flex-row items-center justify-center pt-6 lg:pt-32">
-          <div className="flex flex-col lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300">
+        <div className="w-full h-px bg-secondaryColor mx-10 transition-all duration-300" />
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center pt-6">
+          <div className="flex flex-col w-full lg:w-[40vw] items-center transition-all duration-300">
             <div>
               <h1
                 className="text-3xl lg:text-4xl tracking-tight text-center"
@@ -51,7 +51,7 @@ const Content = () => {
                 I&apos;m always open to freelance work or open-souce projects!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[24vh] lg:pl-0 pl-12 w-full lg:w-auto mb-4 lg:mb-0 lg:h-[40vh] justify-center">
+            <div className="flex flex-col lg:h-[24vh] lg:pl-0 pt-4 pb-4 lg:pb-0 pl-12 w-full lg:w-auto mb-4 lg:mb-0">
               <Details
                 type="WhatsApp"
                 description="+6016 3540 886"
@@ -72,8 +72,8 @@ const Content = () => {
               />
             </div>
           </div>
-          <div className="w-full lg:h-full h-px lg:w-px bg-secondaryColor mx-10 transition-all duration-300" />
-          <div className="flex flex-col pt-5 lg:pt-0 lg:gap-16 w-full lg:w-[35vw] items-center transition-all duration-300">
+          <div className="absolute w-[100vw] -translate-y-16 lg:hidden lg:h-full h-px lg:w-px bg-secondaryColor transition-all duration-300" />
+          <div className="flex flex-col pt-5 pb-10 lg:pt-0 w-full lg:w-[40vw] items-center transition-all duration-300">
             <div>
               <h1
                 className="text-3xl lg:text-4xl tracking-tight text-center"
@@ -92,7 +92,7 @@ const Content = () => {
                 Drop a follow if you find my stuff interesting!
               </p>
             </div>
-            <div className="flex flex-col lg:gap-6 h-[40vh] lg:h-[50vh] lg:pl-0 pl-12 w-full lg:w-auto justify-center">
+            <div className="flex flex-col pt-4 lg:pl-0 pl-12 w-full lg:w-auto justify-center">
               <Details
                 type="Portfolio"
                 description="schuah.me"
@@ -148,11 +148,11 @@ const Details = (props: DetailsProps) => {
       className="font-lato font-light text-md lg:text-xl transition-all cursor-pointer"
     >
       <div className="flex flex-row items-center lg:gap-5">
-        <div className="h-14 lg:h-20 w-20">
+        <div className="h-14 lg:h-16 w-20">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            className="fill-accentColor transition-all w-full mt-3 transform h-10 lg:h-14"
+            className="fill-accentColor transition-all w-full mt-3 transform h-12 lg:h-14"
           >
             <path d={icon} />
           </svg>
