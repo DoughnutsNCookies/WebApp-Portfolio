@@ -30,7 +30,13 @@ const Content = () => {
         >
           An ex-audio engineer now diving into IT and software hustle. My dream? Making kick-ass games that everyone can enjoy.
         </p>
-        <div className="w-full h-px bg-secondaryColor mx-10 transition-all duration-300" />
+        <a
+          href="./seanchuah.vcf"
+          className="bg-accentColor px-20 py-4 rounded-full text-backgroundColor text-2xl font-bold hover:scale-110 transition-all cursor-pointer"
+        >
+          Save my contact!
+        </a>
+        <div className="w-full h-px bg-secondaryColor mx-10 mt-10 lg:mt-6 transition-all duration-300" />
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center pt-6">
           <div className="flex flex-col w-full lg:w-[40vw] items-center transition-all duration-300">
             <div>
@@ -145,7 +151,7 @@ const Details = (props: DetailsProps) => {
     <a
       href={href}
       target="_blank"
-      className="font-lato font-light text-md lg:text-xl transition-all cursor-pointer"
+      className="font-lato font-light text-md lg:text-xl transition-all cursor-pointer hover:scale-110"
     >
       <div className="flex flex-row items-center lg:gap-5">
         <div className="h-14 lg:h-16 w-20">
@@ -157,7 +163,7 @@ const Details = (props: DetailsProps) => {
             <path d={icon} />
           </svg>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col pt-3">
           <h1
             className="text-md lg:text-2xl font-semibold tracking-tight cursor-pointer"
             style={{
