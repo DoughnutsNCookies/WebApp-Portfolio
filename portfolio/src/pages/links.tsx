@@ -34,7 +34,7 @@ const Content = () => {
           href="./seanchuah.vcf"
           className="bg-accentColor px-20 py-4 rounded-full text-backgroundColor text-2xl font-bold hover:scale-110 transition-all cursor-pointer"
         >
-          Save my contact!
+          Save My Contact!
         </a>
         <div className="w-full h-px bg-secondaryColor mx-10 mt-10 lg:mt-6 transition-all duration-300" />
         <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center pt-6">
